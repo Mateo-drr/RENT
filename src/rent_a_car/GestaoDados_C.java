@@ -56,6 +56,10 @@ public class GestaoDados_C {
     public int getTotalTiposVeic() {
         return arr_tipov.size();
     }
+    
+    public int getTotalVeic(){
+        return arr_veic.size();
+    }
 
     public void NovoVeiculo(Veiculo_C v) {
         arr_veic.add(v);

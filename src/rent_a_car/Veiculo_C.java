@@ -14,18 +14,17 @@ public class Veiculo_C{
     private int numpessoas;
     private String tipogas;
     private int quilometragem;
-    private int capbaggagem;
     private int numalugueres;
     private TipoVeiculo_C tipo;
 
-    public Veiculo_C(int matricula, int numpessoas, String tipogas, int quilometragem, int capbaggagem, int numalugueres, TipoVeiculo_C tipo) {
+
+    public Veiculo_C(int matricula, int numpessoas, String tipogas, int quilometragem, TipoVeiculo_C tipo) {
         this.matricula = matricula;
         this.numpessoas = numpessoas;
         this.tipogas = tipogas;
         this.quilometragem = quilometragem;
-        this.capbaggagem = capbaggagem;
-        this.numalugueres = numalugueres;
         this.tipo = tipo;
+
     }
 
     /**
@@ -84,19 +83,6 @@ public class Veiculo_C{
         this.quilometragem = quilometragem;
     }
 
-    /**
-     * @return the capbaggagem
-     */
-    public int getCapbaggagem() {
-        return capbaggagem;
-    }
-
-    /**
-     * @param capbaggagem the capbaggagem to set
-     */
-    public void setCapbaggagem(int capbaggagem) {
-        this.capbaggagem = capbaggagem;
-    }
 
     /**
      * @return the numalugueres
@@ -126,10 +112,9 @@ public class Veiculo_C{
         this.tipo = tipo;
     }
 
+
     @Override
     public String toString() {
-        return "Matricula: "+ matricula + "\nNumero de pessoas: " + numpessoas + "\nTipo Gas: : "+ tipogas + "\nCapacidade de baggagem: " + capbaggagem + "Numero de Alugeres: " + numalugueres + "Quilometragem: " + quilometragem; //To change body of generated methods, choose Tools | Templates.
+        return "Matricula: "+ matricula + "\nNumero de pessoas: " + numpessoas + "\nTipo Gas: : "+ tipogas + "\nNumero de Alugeres: " + numalugueres + "\nQuilometragem: " + quilometragem +"\nTipo de Veiculo: " + tipo; 
     }
-    
-    
 }

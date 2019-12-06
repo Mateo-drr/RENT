@@ -21,9 +21,6 @@ public class Rent_a_car {
         int op;     //opcao a escolher do menu principal
         int opsub = -1;  //opcao a escolher nos submenus
         
-        
-        
-        
         do {
             op = menu();
             switch (op) {
@@ -123,14 +120,14 @@ public class Rent_a_car {
                                 System.out.println("Tipo de Veiculo Criado!");
                                 break;
                             case 2:
-                                System.out.println(gd.ListarTodosTiposVeiculos());
+                                ListartodosTiposdeVeic();
                                 break;
                             case 3:
                                 InserirVeic();
                                 System.out.println("Veiculo Registrado!");
                                 break;
                             case 4:
-                                //System.out.println(gd.);
+                                ListarVeicxTipo();
                                 break;
                             case 0:
                                 break;
@@ -231,6 +228,13 @@ public class Rent_a_car {
         gd.NovoTipoVeiculo(tv);
     }
     
+    public static void ListartodosTiposdeVeic(){
+        if(gd.getTotalTiposVeic() != 0)
+        System.out.println(gd.ListarTodosTiposVeiculos());
+        else
+            System.out.println("Nao a tipos de veiculos inseridos!");
+    }
+    
     public static void InserirVeic(){
         int i;
         int numtipov;
@@ -245,19 +249,29 @@ public class Rent_a_car {
         int matricula = Consola.lerInt("Insira a matricula: ", 0, 999999999);
         int numpessoas = Consola.lerInt("Insira o numero de pessoas que o veiculo pode levar: ", 1, 50);
         String tipogas = Consola.lerString("Insira o tipo de gas: ");
-        int quilometragem = Consola.lerInt("Insira o quilometragem atual", 0, 999999999);
-        int capbaggagem = Consola.lerInt("Insira a capacidade de baggagem", 1, 50);
-        int numalugueres = Consola.lerInt("Insira o numero de alugueres do veiculo: ", 0, 999999999);
+        int quilometragem = Consola.lerInt("Insira o quilometragem atual: ", 0, 999999999);
+        int lig = Consola.lerInt("O veiculo e ligeiro? (1.sim) (0.nao): ", 0, 1);
+        boolean ligeiro = (lig == 1);
         
         TipoVeiculo_C tv;
-        tv = gd.ObterTipoVeicPorNum(numtipov);
-        Veiculo_C v = new Veiculo_C(matricula, numpessoas, tipogas, quilometragem, capbaggagem, numalugueres, tv);
+        tv = gd.ObterTipoVeicPorNum(numtipov-1);
+        Veiculo_C v;
+        if(ligeiro){
+            int capbaggagem = Consola.lerInt("Insira a capacidade de baggagem: ", 1, 50);
+            v = new VeiculoLigeiro_C(capbaggagem, numpessoas, matricula, numpessoas, tipogas, quilometragem, tv);
+        }
+        else
+           v = new Veiculo_C(matricula, numpessoas, tipogas, quilometragem, tv);
         gd.NovoVeiculo(v);
     }
     
-    
-    
-    
+    public static void ListarVeicxTipo(){
+        if(gd.getTotalTiposVeic() != 0){
+                String tipo = Consola.lerString("Cual e o tipo de veiculo?: ");
+                System.out.println(gd.ObterVeiculosPorTipo(tipo));
+        }else
+            System.out.println("Nao a tipos de veiculos inseridos!");
+    }
     
     public static void InserirFunc(){
         

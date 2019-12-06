@@ -94,11 +94,6 @@ public class TipoVeiculo_C {
         this.preco = preco;
     }
 
-    @Override
-    public String toString() {
-        return numero + designacao + descricao + preco;
-    }
-
     /**
      * @return the arr_veic_tv
      */
@@ -113,4 +108,9 @@ public class TipoVeiculo_C {
         this.arr_veic_tv = arr_veic_tv;
     }
 
+    @Override
+    public String toString() {
+        return "Numero: " + numero + "\nDesignacao: " + designacao + "\nDescricao: " + descricao + "\nPreco: " + preco;
+    }
+            
 }
