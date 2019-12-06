@@ -5,6 +5,7 @@
  */
 package rent_a_car;
 
+import java.util.Calendar;
 import util.Consola;
 
 /**
@@ -59,6 +60,8 @@ public class Rent_a_car {
         return opcao;
     }
         
+    //SOUT SUBMENUS
+    
     public static int menuVeiculos(){
         System.out.println("1. Adicionar um tipo de Veiculo");
         System.out.println("2. Consultar todos os tipos de Veiculos");
@@ -110,7 +113,9 @@ public class Rent_a_car {
         return opcao;
     }
     
-     public static void menuCase1(int opsub){
+    //SUBMENUS
+    
+    public static void menuCase1(int opsub){
         
         do{
                         opsub = menuVeiculos();
@@ -141,8 +146,11 @@ public class Rent_a_car {
                         opsub = menuFuncionarios();
                         switch(opsub){
                             case 1:
+                                InserirFunc();
+                                System.out.println("Funcionario registrado!\n");
                                 break;
                             case 2:
+                                ListarFunc();
                                 break;
                             case 0:
                                 break;
@@ -217,6 +225,8 @@ public class Rent_a_car {
         
     }
     
+    //VEICULOS
+    
     public static void InserirTipoVeic(){
         
         String designacao = Consola.lerString("Insira a designacao do tipo de veiculo: ");
@@ -232,12 +242,14 @@ public class Rent_a_car {
         if(gd.getTotalTiposVeic() != 0)
         System.out.println(gd.ListarTodosTiposVeiculos());
         else
-            System.out.println("Nao a tipos de veiculos inseridos!");
+            System.out.println("Nao a tipos de veiculos inseridos!\n");
     }
     
     public static void InserirVeic(){
         int i;
         int numtipov;
+        int matricula;
+        
         //Verificacao do numero do tipo de veiculo
         do{
             numtipov = Consola.lerInt("Insira o numero do tipo de veiculo: ", 1, 10);
@@ -246,22 +258,37 @@ public class Rent_a_car {
                 System.out.println("Numero do tipo de veiculo nao existe!");
         }while(i == -1);
         
-        int matricula = Consola.lerInt("Insira a matricula: ", 0, 999999999);
+        //Verificacao da matricula
+        do{
+            matricula = Consola.lerInt("Insira a matricula: ", 0, 999999999);
+            i = gd.VerifMatriculaUnica(matricula);
+            if(i == 0)
+                System.out.println("Numero de matricula ja existe!");
+        }while(i == 0);
+        
         int numpessoas = Consola.lerInt("Insira o numero de pessoas que o veiculo pode levar: ", 1, 50);
         String tipogas = Consola.lerString("Insira o tipo de gas: ");
         int quilometragem = Consola.lerInt("Insira o quilometragem atual: ", 0, 999999999);
         int lig = Consola.lerInt("O veiculo e ligeiro? (1.sim) (0.nao): ", 0, 1);
         boolean ligeiro = (lig == 1);
         
+        //Tipo de veiculo
         TipoVeiculo_C tv;
         tv = gd.ObterTipoVeicPorNum(numtipov-1);
         Veiculo_C v;
+        
+        //Veiculos Ligeiros
         if(ligeiro){
             int capbaggagem = Consola.lerInt("Insira a capacidade de baggagem: ", 1, 50);
-            v = new VeiculoLigeiro_C(capbaggagem, numpessoas, matricula, numpessoas, tipogas, quilometragem, tv);
+            int numportas = Consola.lerInt("Insira o numero de portas: ", 3, 5);
+            v = new VeiculoLigeiro_C(capbaggagem, numportas, matricula, numpessoas, tipogas, quilometragem, tv);
         }
-        else
+        else{
+        //Veiculo nao Ligeiro 
            v = new Veiculo_C(matricula, numpessoas, tipogas, quilometragem, tv);
+        }
+        
+        //Salvar veiculo
         gd.NovoVeiculo(v);
     }
     
@@ -272,6 +299,8 @@ public class Rent_a_car {
         }else
             System.out.println("Nao a tipos de veiculos inseridos!");
     }
+    
+    //FUNCIONARIOS
     
     public static void InserirFunc(){
         
@@ -288,8 +317,44 @@ public class Rent_a_car {
     }
     
     public static void ListarFunc(){
-        
+        if(gd.getTotalFunc() != 0)
+            System.out.println(gd.ListarTodosFunc());
+        else
+            System.out.println("Nao a funcionarios registrados!\n");
     }
     
+    //CONDUTORES
     
+    public static void InserirCondutor(){
+        
+        int x;
+        String datax;
+        
+        int NIF = Consola.lerInt("NIF do condutor: ", 0, 999999999);
+        String nome = Consola.lerString("Insira o nome do condutor: ");
+        String morada = Consola.lerString("Insira a morada: ");
+        int telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
+        int cartcond = Consola.lerInt("Insira o numero da carta conducao: ", 0, 999999999);
+        
+        String data = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
+        
+       
+        
+//        do {
+//            x = 0;
+//            try {
+//                datax = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
+//                data.setTime(formato.parse(datax));
+//            } catch (ParseException e) {
+//                x = 1;
+//                System.err.println("Data de nascimento com formato inválido!");
+//            }
+//        } while (errodn == 1);
+        
+        
+        //Condutor_C cond = new Condutor_C(NIF, nome, morada, telefone, cartcond, data);
+        
+        //gd.NovoCondutor(cond);
+        
+    }
 }

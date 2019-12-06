@@ -19,6 +19,9 @@ public class GestaoDados_C {
     ArrayList<Condutor_C> arr_cond = new ArrayList<>(); //Array dos condutores
     ArrayList<Veiculo_C> arr_veic = new ArrayList<>(); //Array dos veiculos
     ArrayList<TipoVeiculo_C> arr_tipov = new ArrayList<>();
+    
+    
+    //VEICULOS
 
     public void NovoTipoVeiculo(TipoVeiculo_C tv) {
         tv.setNumero(arr_tipov.size() + 1);
@@ -47,12 +50,6 @@ public class GestaoDados_C {
         return arr_tipov.get(pos);
     }
     
-//    public String NomeTipoVeicPorNum() {
-//        for (int i = 0; i < arr_tipov.size(); i++){
-//            return arr_tipov.get(i).getDesignacao();
-//        }
-//    }
-
     public int getTotalTiposVeic() {
         return arr_tipov.size();
     }
@@ -77,16 +74,39 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    public int VerifMatriculaUnica(int matricula){
+        for (int i = 0; i < arr_veic.size(); i++) {
+            if(arr_veic.get(i).getMatricula() == matricula){
+                return 0;
+            }
+        }
+        return -1;
+    }
+    
+    //FUNCIONARIOS
+    
     public void NovoFuncioanrio(Funcionario_C f){
         arr_func.add(f);
     }
     
-    public String ListarFunc(){
+    public String ListarTodosFunc(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_func.size(); i++) {
             str.append(arr_func.get(i)).append("\n");
         }
         return str.toString();
+    }
+    
+    public int getTotalFunc(){
+        return arr_func.size();
+    }
+    
+    //CONDUTORES
+    
+    public void NovoCondutor(Condutor_C c){
+        
+        arr_cond.add(c);
+        
     }
     
 }

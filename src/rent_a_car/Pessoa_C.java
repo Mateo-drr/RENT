@@ -22,6 +22,11 @@ public abstract class Pessoa_C {
         this.morada = morada;
         this.telefone = telefone;
     }
+
+    @Override
+    public String toString() {
+        return "\nNIF: "+ NIF+ "\nNome: "+ nome+ "\nMorada: "+ morada+ "\nTelefone: "+ telefone; //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
