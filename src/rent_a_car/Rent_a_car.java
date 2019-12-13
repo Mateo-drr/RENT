@@ -5,16 +5,21 @@
  */
 package rent_a_car;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import util.Consola;
 
 /**
- *
+ * Main
  * @author Mateo
  */
 public class Rent_a_car {
 
-    
+    public static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+    public static SimpleDateFormat formatoH = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     public static GestaoDados_C gd = new GestaoDados_C();
     
     public static void main(String[] args) {
@@ -89,15 +94,16 @@ public class Rent_a_car {
     }
     
     public static int menuAlugueres(){
-        System.out.println("1. Adicionar opcao de aluguel");
-        System.out.println("2. Consultar opcoes de aluguel");
-        System.out.println("3. Consultar opcoes de aluguel por estado");
-        System.out.println("4. Alterar datas de levantamento");
-        System.out.println("5. Alterar locais de levantamentos");
-        System.out.println("6. Alterar locais de entrega");
-        System.out.println("7. Cancelar aluguer");
-        System.out.println("8. Levantar Veiculo");
-        System.out.println("9. Entregar Veiculo");
+        System.out.println("1. Adicionar opcao de aluguer");
+        System.out.println("2. Consultar opcoes de aluguer");
+        System.out.println("3. Registrar aluguer");
+        System.out.println("4. Consultar alugueres por estado");
+        System.out.println("5. Alterar datas de levantamento");
+        System.out.println("6. Alterar locais de levantamentos");
+        System.out.println("7. Alterar locais de entrega");
+        System.out.println("8. Cancelar aluguer");
+        System.out.println("9. Levantar Veiculo");
+        System.out.println("10. Entregar Veiculo");
         System.out.println("0. Voltar ao menu principal");
         int opcao = Consola.lerInt("Qual a opcao", 0, 9);
         return opcao;
@@ -165,8 +171,10 @@ public class Rent_a_car {
                         opsub = menuCondutores();
                         switch(opsub){
                             case 1:
+                                InserirCondutor();
                                 break;
                             case 2:
+                                ObterCondutorxNIF();
                                 break;
                             case 0:
                                 break;
@@ -181,10 +189,14 @@ public class Rent_a_car {
                         opsub = menuAlugueres();
                         switch(opsub){
                             case 1:
+                                InserirOpcaoAlug();
+                                System.out.println("Opcao aluguel criada!");
                                 break;
                             case 2:
+                                ListarTodasOpcoesAlug();
                                 break;
                             case 3:
+                                
                                 break;
                             case 4:
                                 break;
@@ -251,6 +263,7 @@ public class Rent_a_car {
         int matricula;
         
         //Verificacao do numero do tipo de veiculo
+        System.out.println(gd.ListarTodosTiposVeiculos());
         do{
             numtipov = Consola.lerInt("Insira o numero do tipo de veiculo: ", 1, 10);
             i = gd.VerifNumerotipoveic(numtipov);
@@ -287,6 +300,9 @@ public class Rent_a_car {
         //Veiculo nao Ligeiro 
            v = new Veiculo_C(matricula, numpessoas, tipogas, quilometragem, tv);
         }
+        
+        
+
         
         //Salvar veiculo
         gd.NovoVeiculo(v);
@@ -325,10 +341,12 @@ public class Rent_a_car {
     
     //CONDUTORES
     
+    //falta mostrar alugueres de ese condutor
     public static void InserirCondutor(){
         
         int x;
         String datax;
+        Calendar data = new GregorianCalendar();
         
         int NIF = Consola.lerInt("NIF do condutor: ", 0, 999999999);
         String nome = Consola.lerString("Insira o nome do condutor: ");
@@ -336,25 +354,78 @@ public class Rent_a_car {
         int telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
         int cartcond = Consola.lerInt("Insira o numero da carta conducao: ", 0, 999999999);
         
-        String data = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
+        //String data = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
         
-       
+        do {
+            x = 0;
+            try {
+                datax = Consola.lerString("Data de validade do cartao (dd-mm-yyyy): ");
+                data.setTime(formato.parse(datax));
+            } catch (ParseException e) {
+                x = 1;
+                System.err.println("Data de nascimento com formato inválido!");
+            }
+        } while (x == 1);
+        
+        Condutor_C cond = new Condutor_C(NIF, nome, morada, telefone, cartcond, data);
+        
+        gd.NovoCondutor(cond);
+        
+    }
+    
+    public static void ObterCondutorxNIF(){
+        if(gd.getTotalCond()!= 0){
+                int findNIF = Consola.lerInt("Cual e o NIF: ", 0, 999999999);
+                System.out.println(gd.ObterCondutorxNIF(findNIF));
+        }else
+            System.out.println("Nao a condutores registrados!");
+    }
+    
+    //Opcao Alugueres
+    
+    public static void InserirOpcaoAlug(){
+        
+        String nome = Consola.lerString("Nome da opcao: ");
+        String descri = Consola.lerString("Descricao opcao: ");
+        float preco = Consola.lerFloat("Preco da opcao: ", 0, 10000);
+        
+        Opcao_aluguel_C opal = new Opcao_aluguel_C(nome, descri, preco);
+        
+        gd.NovaOpcaoAlug(opal);
+        
+    }
+    
+    public static void ListarTodasOpcoesAlug(){
+        if(gd.getTotalOpAl() != 0)
+            System.out.println(gd.ListarTodasOpAl());
+        else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");
+    }
+    
+    //Alugueres
+    
+    public static void RegistrarAlug(){
+        //int tipoaluger;
+        String locallevant = Consola.lerString("Local de levantamento: ");
+        String localentrega = Consola.lerString("Local de entrega: ");
+        //Calendar dialevantHora;
+        //Calendar diaentregaHora;
+        Condutor_C condutor;
+        Veiculo_C veiculo;
+        int numpessoas;
+        String caractreserva;
+        ArrayList< Opcao_aluguel_C> opalug = new ArrayList<>();
+        float preco;
         
 //        do {
 //            x = 0;
 //            try {
-//                datax = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
+//                datax = Consola.lerString("Data de validade do cartao (dd-mm-yyyy): ");
 //                data.setTime(formato.parse(datax));
 //            } catch (ParseException e) {
 //                x = 1;
 //                System.err.println("Data de nascimento com formato inválido!");
 //            }
-//        } while (errodn == 1);
-        
-        
-        //Condutor_C cond = new Condutor_C(NIF, nome, morada, telefone, cartcond, data);
-        
-        //gd.NovoCondutor(cond);
-        
+//        } while (x == 1);
     }
 }

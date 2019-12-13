@@ -18,9 +18,9 @@ public class GestaoDados_C {
     ArrayList<Funcionario_C> arr_func = new ArrayList<>(); //Array dos funcionarios
     ArrayList<Condutor_C> arr_cond = new ArrayList<>(); //Array dos condutores
     ArrayList<Veiculo_C> arr_veic = new ArrayList<>(); //Array dos veiculos
-    ArrayList<TipoVeiculo_C> arr_tipov = new ArrayList<>();
-    
-    
+    ArrayList<TipoVeiculo_C> arr_tipov = new ArrayList<>(); //Array dos tipos de veiculos
+    ArrayList<Opcao_aluguel_C> arr_opalug = new ArrayList<>(); // Array das opcoes de aluguel
+        
     //VEICULOS
 
     public void NovoTipoVeiculo(TipoVeiculo_C tv) {
@@ -109,4 +109,36 @@ public class GestaoDados_C {
         
     }
     
+    public String ObterCondutorxNIF(int NIF){
+        
+        //StringBuilder str = new StringBuilder("");
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getNIF() == NIF){
+                return arr_cond.get(i).toString();
+            }
+        }
+        return "N";
+    }
+    
+    public int getTotalCond(){
+        return arr_cond.size();
+    }
+    
+    //OPCAO ALUGUEL
+    
+    public void NovaOpcaoAlug(Opcao_aluguel_C opalug){
+        arr_opalug.add(opalug);
+    }
+    
+    public int getTotalOpAl(){
+        return arr_opalug.size();
+    }
+    
+    public String ListarTodasOpAl(){
+        StringBuilder str = new StringBuilder("");
+        for (int i = 0; i < arr_opalug.size(); i++) {
+            str.append(arr_opalug.get(i)).append("\n");
+        }
+        return str.toString();
+    }
 }
