@@ -14,6 +14,7 @@ public class Opcao_aluguel_C {
     private String nome;
     private String descri;
     private float preco;
+    private int num;
 
     public Opcao_aluguel_C(String nome, String descri, float preco) {
         this.nome = nome;
@@ -62,6 +63,26 @@ public class Opcao_aluguel_C {
     public void setPreco(float preco) {
         this.preco = preco;
     }
+
+    /**
+     * @return the num
+     */
+    public int getNum() {
+        return num;
+    }
+
+    /**
+     * @param num the num to set
+     */
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return num + "-" + nome + "-" + descri + "-" + preco; //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }
