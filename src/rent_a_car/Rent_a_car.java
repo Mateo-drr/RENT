@@ -208,18 +208,31 @@ public class Rent_a_car {
                                 System.out.println("Data e hora de levantamento alteradas!");
                                 break;
                             case 6:
+                                AlterarDeHE();
+                                System.out.println("Data e hora de entrega alteradas!");
                                 break;
                             case 7:
+                                AlterarLocLev();
+                                System.out.println("Local de levantamento alterado!");
                                 break;
                             case 8:
+                                AlterarLocEnt();
+                                System.out.println("Local de entrega alterado!");
                                 break;
                             case 9:
+                                CancelarAl();
+                                System.out.println("Aluguer cancelado");
                                 break;
                             case 10:
+                                LevantarVeic();
+                                System.out.println("O Aluguer foi iniciado e o veiculo levantado!");
                                 break;
                             case 11:
+                                EntregarVeic();
+                                System.out.println("O alugueer foi terminado e o veiculo entregado!");
                                 break;
                             case 0:
+                                
                                 break;
                         }
                     }while(opsub != 0);
@@ -544,5 +557,100 @@ public class Rent_a_car {
         
         al.setDialevantHora(DeHL);
         
+    }
+    
+    public static void AlterarDeHE(){
+        int y;
+        String datay;
+        Calendar DeHE = new GregorianCalendar();
+        
+        if(gd.getTotalAl() != 0)
+            System.out.println(gd.ListarAlugReserv());
+        else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");
+        
+        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de entrega: ", 1, gd.getTotalAl());
+        Aluguer_C al = gd.ObterAlugxNum(numero);
+        
+        do {
+            y = 0;
+            try {
+                datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
+                DeHE.setTime(formatoH.parse(datay));
+            } catch (ParseException e) {
+                y = 1;
+                System.err.println("Data e hora com formato inválido!");
+            }
+        } while (y == 1);
+        
+        al.setDiaentregaHora(DeHE);
+    }
+    
+    public static void AlterarLocLev(){
+        
+        if(gd.getTotalAl() != 0)
+            System.out.println(gd.ListarAlugReserv());
+        else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");
+        
+        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de levantamento: ", 1, gd.getTotalAl());
+        Aluguer_C al = gd.ObterAlugxNum(numero);
+        
+        al.setLocallevant(Consola.lerString("Local de levantamento novo: "));
+        
+    }
+    
+    public static void AlterarLocEnt(){
+        
+        if(gd.getTotalAl() != 0)
+            System.out.println(gd.ListarAlugReserv());
+        else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");
+        
+        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de entrega: ", 1, gd.getTotalAl());
+        Aluguer_C al = gd.ObterAlugxNum(numero);
+        
+        al.setLocalentrega(Consola.lerString("Local de entrega novo: "));
+        
+    }
+    
+//    public static void CancelarAl(){
+//        if(gd.getTotalAl() != 0){
+//            System.out.println(gd.ListarAlugReserv());
+//            int numero = Consola.lerInt("Escolha o numero do alguer que deseja cancelar: ", 1, gd.getTotalAl());
+//            gd.CancelarAlug(numero);
+//        }else
+//            System.out.println("Nao a tipos de veiculos inseridos!\n");        
+//    }
+    
+    public static void CancelarAl(){
+        if(gd.getTotalAl() != 0){
+            System.out.println(gd.ListarAlugReserv());
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja cancelar: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            al.setTipoaluger(3);
+        }else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");        
+    }
+    
+    public static void LevantarVeic(){
+        if(gd.getTotalAl() != 0){
+            System.out.println(gd.ListarAlugReserv());
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            al.setTipoaluger(2);
+        }else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");        
+    }
+    
+    public static void EntregarVeic(){
+        //agregar quilometragem
+        if(gd.getTotalAl() != 0){
+            System.out.println(gd.ListarAlugxEstado(2)); // revisar si tienes esta funcion con la de alugueres reserv. duplicada, osea si hace lo mismo
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            al.setTipoaluger(2);
+        }else
+            System.out.println("Nao a tipos de veiculos inseridos!\n");      
     }
 }

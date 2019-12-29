@@ -5,6 +5,7 @@
  */
 package rent_a_car;
 
+import java.awt.AWTEventMulticaster;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -215,5 +216,8 @@ public class GestaoDados_C {
         return arr_alug.get(num-1);
     }
     
+//    public void CancelarAlug(int num){
+//        arr_alug.remove(num-1);
+//    }
     
 }
