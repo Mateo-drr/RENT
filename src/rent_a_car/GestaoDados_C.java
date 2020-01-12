@@ -70,8 +70,11 @@ public class GestaoDados_C {
     public String ObterVeiculosPorTipo(String tipo){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_tipov.size(); i++) {
-            if(arr_tipov.get(i).getDescricao().equalsIgnoreCase(tipo))
-                str.append(arr_tipov.get(i).getArr_veic_tv()).append("\n");
+            if(arr_tipov.get(i).getDescricao().equalsIgnoreCase(tipo)){
+                for (int j = 0; j < arr_tipov.get(i).getArr_veic_tv().size(); j++) {
+                    str.append(arr_tipov.get(i).getArr_veic_tv().get(j).toString()).append("\n");
+                }
+            }
         }
         return str.toString();
     }
@@ -199,6 +202,15 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    public String ListarAlugxCond(Condutor_C cond){
+        StringBuilder str = new StringBuilder("");
+        for (int i = 0; i < arr_alug.size(); i++) {
+            if(arr_alug.get(i).getCondutor() == cond)
+                str.append(arr_alug.get(i)).append("\n");
+        }
+        return str.toString();
+    }
+    
     public String ListarAlugReserv(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
@@ -219,5 +231,28 @@ public class GestaoDados_C {
 //    public void CancelarAlug(int num){
 //        arr_alug.remove(num-1);
 //    }
+    
+    //ESTATISTICAS
+    
+    public float NumAlugCancel(){
+        float j = 0;
+        for (int i = 0; i < arr_alug.size(); i++) {
+            if(arr_alug.get(i).getTipoaluger() == 3)
+                j++;
+        }
+        //arr_alug.size() ---> 100%
+        // j ----------------> ?
+        j = j*100/arr_alug.size();
+        return j;
+    }
+    
+    //PRECO ALUG/ANO
+//    public float PrecototAlugxAno(){
+//        for (int i = 0; i < arr_alug.size(); i++) {
+//            if(arr_alug.get(i).getDiaentregaHora())
+//        }
+//        
+//    }
+    
     
 }

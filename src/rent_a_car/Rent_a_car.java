@@ -106,7 +106,7 @@ public class Rent_a_car {
         System.out.println("10. Levantar Veiculo");
         System.out.println("11. Entregar Veiculo");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 9);
+        int opcao = Consola.lerInt("Qual a opcao", 0, 11);
         return opcao;
     }
     
@@ -245,12 +245,16 @@ public class Rent_a_car {
             opsub = menuEStatisticas();
             switch(opsub){
                 case 1:
+                    PercentagemCancel();
                     break;
                 case 2:
+                    TotalVeicAlug();
                     break;
                 case 3:
+                    //Falta
                     break;
                 case 4:
+                    //Falta
                     break;
                 case 0:
                     break;
@@ -288,6 +292,7 @@ public class Rent_a_car {
         System.out.println(gd.ListarTodosTiposVeiculos());
         do{
             numtipov = Consola.lerInt("Insira o numero do tipo de veiculo: ", 1, 10);
+            System.out.println(gd.ListarTodosTiposVeiculos());
             i = gd.VerifNumerotipoveic(numtipov);
             if(i == -1)
                 System.out.println("Numero do tipo de veiculo nao existe!");
@@ -330,6 +335,7 @@ public class Rent_a_car {
         gd.NovoVeiculo(v);
     }
     
+    //falta verificacao
     public static void ListarVeicxTipo(){
         if(gd.getTotalTiposVeic() != 0){
                 String tipo = Consola.lerString("Cual e o tipo de veiculo?: ");
@@ -398,7 +404,12 @@ public class Rent_a_car {
     public static void ObterCondutorxNIF(){
         if(gd.getTotalCond()!= 0){
                 int findNIF = Consola.lerInt("Cual e o NIF: ", 0, 999999999);
-                System.out.println(gd.ObterCondutorxNIF(findNIF));
+                System.out.println(gd.MostrarCondutorxNIF(findNIF));
+                //System.out.println(gd.ObterCondutorxNIF(findNIF));
+                int i = gd.ObterCondutorxNIF(findNIF);
+                Condutor_C cond = gd.Obtercondxposarr(i);
+                System.out.println("Alugueres \n:");
+                System.out.print(gd.ListarAlugxCond(cond));
         }else
             System.out.println("Nao a condutores registrados!");
     }
@@ -428,94 +439,104 @@ public class Rent_a_car {
     
     public static void RegistrarAlug(){
         
-        int PosCond;
-        int PosVeic;
-        int y;
-        char resposta;
-        String datay;
-        Calendar DeHL = new GregorianCalendar();
-        Calendar DeHE = new GregorianCalendar();
+        if(gd.getTotalCond() != 0){
+            if(gd.getTotalVeic() != 0){
+                int PosCond;
+                int PosVeic;
+                int y;
+                char resposta;
+                String datay;
+                Calendar DeHL = new GregorianCalendar();
+                Calendar DeHE = new GregorianCalendar();
+
+                String locallevant = Consola.lerString("Local de levantamento: ");
+                String localentrega = Consola.lerString("Local de entrega: ");
+
+                //Posicao condutor no arr_cond
+                do{
+                    int NIF = Consola.lerInt("NIF do Condutor: ", 0, 999999999);
+                    PosCond = gd.ObterCondutorxNIF(NIF);
+                    if(PosCond == -1)
+                        System.out.println("NIF nao registrado!");
+                }while(PosCond == -1);
+
+                //Condutor
+                Condutor_C cond = gd.Obtercondxposarr(PosCond);
+
+                //Posicao veiculo no arr_veic
+                do{
+                    int matr = Consola.lerInt("Matricula do veiculo: ", 0, 999999999);
+                    PosVeic = gd.ObterVeiculoxMatr(matr);
+                    if(PosCond == -1)
+                        System.out.println("Veiculo nao registrado!");
+                }while(PosVeic == -1);
+
+                //Veiculo
+                Veiculo_C v = gd.ObterVeicxposarr(PosVeic);
+
+                //Num pessoas do veic escolhido
+                int nump = v.getNumpessoas();
+
+                //caracteristica reserva
+                String caractreserva = Consola.lerString("Caracteristica de la reserva: ");
+
+                //Data e hora lev.
+                do {
+                    y = 0;
+                    try {
+                        datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
+                        DeHL.setTime(formatoH.parse(datay));
+                    } catch (ParseException e) {
+                        y = 1;
+                        System.err.println("Data e hora com formato inválido!");
+                    }
+                } while (y == 1);
+
+                //Data e hora ent.
+                do {
+                    y = 0;
+                    try {
+                        datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
+                        DeHE.setTime(formatoH.parse(datay));
+                    } catch (ParseException e) {
+                        y = 1;
+                        System.err.println("Data e hora com formato inválido!");
+                    }
+                } while (y == 1);
+
+                //tipo de aluguer = 1. reservado
+                int tipal = 1;
+
+                //preco sem opcoes extra
+                double preco = v.getTipo().getPreco();
+
+                Aluguer_C al = new Aluguer_C(tipal, locallevant, localentrega, DeHE, DeHE, cond, v, nump, caractreserva, preco);
+
+                //Opcao alug
+                do{
+                    resposta= Consola.lerChar("Pretende associar uma opcao", "SsNn");
+                    if(resposta == 'S' || resposta == 's'){
+                        System.out.println(gd.ListarTodasOpAl());
+                        int num = Consola.lerInt("Numero da opcao a escolher: ", 1, gd.getTotalOpAl());
+                        Opcao_aluguel_C op = gd.ObterOpAl(num-1);
+                        al.NovaOpcaoAlug(op);
+                        preco += op.getPreco();
+                    }
+                }while(resposta== 'S' || resposta == 's');
+
+                //preco com opcoes extra
+                al.setPreco(preco);
+
+                //Salvar aluguer criado
+                gd.NovoAluguer(al);
         
-        String locallevant = Consola.lerString("Local de levantamento: ");
-        String localentrega = Consola.lerString("Local de entrega: ");
-        
-        //Posicao condutor no arr_cond
-        do{
-            int NIF = Consola.lerInt("NIF do Condutor: ", 0, 999999999);
-            PosCond = gd.ObterCondutorxNIF(NIF);
-            if(PosCond == -1)
-                System.out.println("NIF nao registrado!");
-        }while(PosCond == -1);
-        
-        //Condutor
-        Condutor_C cond = gd.Obtercondxposarr(PosCond);
-        
-        //Posicao veiculo no arr_veic
-        do{
-            int matr = Consola.lerInt("Matricula do veiculo: ", 0, 999999999);
-            PosVeic = gd.ObterVeiculoxMatr(matr);
-            if(PosCond == -1)
-                System.out.println("Veiculo nao registrado!");
-        }while(PosVeic == -1);
-        
-        //Veiculo
-        Veiculo_C v = gd.ObterVeicxposarr(PosVeic);
-        
-        //Num pessoas do veic escolhido
-        int nump = v.getNumpessoas();
-        
-        //caracteristica reserva
-        String caractreserva = Consola.lerString("Caracteristica de la reserva: ");
-        
-        //Data e hora lev.
-        do {
-            y = 0;
-            try {
-                datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
-                DeHL.setTime(formatoH.parse(datay));
-            } catch (ParseException e) {
-                y = 1;
-                System.err.println("Data e hora com formato inválido!");
+        } else{
+                System.out.println("Nao ha veiculos registrado");
             }
-        } while (y == 1);
+    }else{
+            System.out.println("Nao ha condutores registrados!");
+        }
         
-        //Data e hora ent.
-        do {
-            y = 0;
-            try {
-                datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
-                DeHE.setTime(formatoH.parse(datay));
-            } catch (ParseException e) {
-                y = 1;
-                System.err.println("Data e hora com formato inválido!");
-            }
-        } while (y == 1);
-        
-        //tipo de aluguer = 1. reservado
-        int tipal = 1;
-        
-        //preco sem opcoes extra
-        double preco = v.getTipo().getPreco();
-        
-        Aluguer_C al = new Aluguer_C(tipal, locallevant, localentrega, DeHE, DeHE, cond, v, nump, caractreserva, preco);
-        
-        //Opcao alug
-        do{
-            resposta= Consola.lerChar("Pretende associar uma opcao", "SsNn");
-            if(resposta == 'S' || resposta == 's'){
-                System.out.println(gd.ListarTodasOpAl());
-                int num = Consola.lerInt("Numero da opcao a escolher: ", 1, gd.getTotalOpAl());
-                Opcao_aluguel_C op = gd.ObterOpAl(num-1);
-                al.NovaOpcaoAlug(op);
-                preco += op.getPreco();
-            }
-        }while(resposta== 'S' || resposta == 's');
-        
-        //preco com opcoes extra
-        al.setPreco(preco);
-        
-        //Salvar aluguer criado
-        gd.NovoAluguer(al);
     }
     
     public static void ListarAlugxEstado(){
@@ -640,7 +661,7 @@ public class Rent_a_car {
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setTipoaluger(2);
         }else
-            System.out.println("Nao a tipos de veiculos inseridos!\n");        
+            System.out.println("Nao a alugueres registrados!\n");        
     }
     
     public static void EntregarVeic(){
@@ -651,6 +672,29 @@ public class Rent_a_car {
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setTipoaluger(2);
         }else
-            System.out.println("Nao a tipos de veiculos inseridos!\n");      
+            System.out.println("Nao a alugueres registrados!\n");      
     }
+    
+    //Estatisticas
+    
+    public static void PercentagemCancel(){
+        if(gd.getTotalAl() != 0){
+            System.out.println("Percentagem de alugures cancelados: " + gd.NumAlugCancel() + "%");
+        }else
+            System.out.println("Nao ha alugureres registrados");
+    }
+    
+    public static void TotalVeicAlug(){
+        if(gd.getTotalAl() != 0){
+            float i = gd.getTotalAl() - (gd.NumAlugCancel()*gd.getTotalAl()/100);
+            System.out.println("Numero de alugures registrados: " + i);
+        }else
+            System.out.println("Nao ha alugureres registrados");
+    }
+    
+    public static void PrecoTotalAlugporAno(){
+        
+    }
+    
+    
 }

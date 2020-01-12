@@ -35,7 +35,7 @@ public class Condutor_C extends Pessoa_C{
 
     @Override
     public String toString() {
-        return super.toString() + "\nNumero carta de conduçao: "+ numcartacond +"\nData de validade: "+ datacartcond.get(Calendar.DATE) + "-"+(datacartcond.get(Calendar.MONTH)+1) + "-"+ datacartcond.get(Calendar.YEAR); //To change body of generated methods, choose Tools | Templates.
+        return super.toString() + "\nNumero carta de conduçao: "+ numcartacond +"\nData de validade: "+ datacartcond.get(Calendar.DATE) + "-"+(datacartcond.get(Calendar.MONTH)+1) + "-"+ datacartcond.get(Calendar.YEAR); 
     }
 
     /**
