@@ -73,7 +73,7 @@ public class Rent_a_car {
         System.out.println("3. Adicionar um Veiculo");
         System.out.println("4. Consultar por tipo os Veiculos registrados");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 4);
+        int opcao = Consola.lerInt("Qual a opcao: ", 0, 4);
         return opcao;
     }
     
@@ -81,7 +81,7 @@ public class Rent_a_car {
         System.out.println("1. Adicionar Funcionario");
         System.out.println("2. Consultar Funcionarios");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 2);
+        int opcao = Consola.lerInt("Qual a opcao: ", 0, 2);
         return opcao;
     }
     
@@ -89,7 +89,7 @@ public class Rent_a_car {
         System.out.println("1. Adicionar Condutor");
         System.out.println("2. Consultar Condutor por NIF");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 2);
+        int opcao = Consola.lerInt("Qual a opcao: ", 0, 2);
         return opcao;
     }
     
@@ -106,7 +106,7 @@ public class Rent_a_car {
         System.out.println("10. Levantar Veiculo");
         System.out.println("11. Entregar Veiculo");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 11);
+        int opcao = Consola.lerInt("Qual a opcao: ", 0, 11);
         return opcao;
     }
     
@@ -116,7 +116,7 @@ public class Rent_a_car {
         System.out.println("3. Preco total em alugueres por ano");
         System.out.println("4. Numero total de alugueres registrados por mes num determinado ano");
         System.out.println("0. Voltar ao menu principal");
-        int opcao = Consola.lerInt("Qual a opcao", 0, 4);
+        int opcao = Consola.lerInt("Qual a opcao: ", 0, 4);
         return opcao;
     }
     
@@ -348,10 +348,28 @@ public class Rent_a_car {
     
     public static void InserirFunc(){
         
-        int NIF = Consola.lerInt("NIF do funcionario: ", 0, 999999999);
+        int i;
+        int NIF;
+        int telefone; 
+        //verificaçao do numero de NIF
+        do{
+               NIF = Consola.lerInt("Insira o NIF do funcionario: ", 0, 999999999);
+               i = gd.VerifNIFFunc(NIF);
+               if(i == 0)
+                   System.out.println("Numero de NIF ja existe!");
+           }while(i == 0);
+        
         String nome = Consola.lerString("Insira o nome do funcionario: ");
         String morada = Consola.lerString("Insira a morada: ");
-        int telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
+        
+       
+        //verificaçao numero de telefone do funcionario
+         do{
+               telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
+               i = gd.VerifTelefoneFunc(telefone);
+               if(i == 0)
+                   System.out.println("Numero de telefone ja registrado!");
+           }while(i == 0);
         String funcao = Consola.lerString("Qual e a funcao: ");
         
         Funcionario_C f = new Funcionario_C(NIF, nome, morada, telefone, funcao);
@@ -372,15 +390,42 @@ public class Rent_a_car {
     //falta mostrar alugueres de ese condutor
     public static void InserirCondutor(){
         
+        int i;
         int x;
         String datax;
         Calendar data = new GregorianCalendar();
+        int NIF;
+        int telefone; 
+        int cartcond;  
         
-        int NIF = Consola.lerInt("NIF do condutor: ", 0, 999999999);
+        // verificaçao NIF
+        do{
+               NIF = Consola.lerInt("Insira o NIF do condutor: ", 0, 999999999);
+               i = gd.VerifNIFCond(NIF);
+               if(i == 0)
+                   System.out.println("Numero de NIF ja existe!");
+           }while(i == 0);
+        
         String nome = Consola.lerString("Insira o nome do condutor: ");
         String morada = Consola.lerString("Insira a morada: ");
-        int telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
-        int cartcond = Consola.lerInt("Insira o numero da carta conducao: ", 0, 999999999);
+        
+        
+        //verificaçao numero de telefone do funcionario
+         do{
+               telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
+               i = gd.VerifTelefoneCond(telefone);
+               if(i == 0)
+                   System.out.println("Numero de telefone ja registrado!");
+           }while(i == 0);
+         
+       
+        //verificaçao numero da carta de conduçao
+         do{
+               cartcond = Consola.lerInt("Insira o numero da carta conducao: ", 0, 999999999);
+               i = gd.VerifCartaCond(cartcond);
+               if(i == 0)
+                   System.out.println("Numero da carta de conduçao ja registrado!");
+           }while(i == 0);
         
         //String data = Consola.lerString("Data de validade do cartao (dd/mm/aa): ");
         

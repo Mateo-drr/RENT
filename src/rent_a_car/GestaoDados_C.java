@@ -114,6 +114,22 @@ public class GestaoDados_C {
         }
         return str.toString();
     }
+      public int VerifNIFFunc(int NIF){
+        for (int i = 0; i < arr_func.size(); i++) {
+            if(arr_func.get(i).getNIF() == NIF){
+                return 0;
+            }
+        }
+        return -1;
+    }
+        public int VerifTelefoneFunc(int telefone){
+        for (int i = 0; i < arr_func.size(); i++) {
+            if(arr_func.get(i).getTelefone() == telefone){
+                return 0;
+            }
+        }
+        return -1;
+    }
     
     public int getTotalFunc(){
         return arr_func.size();
@@ -157,6 +173,31 @@ public class GestaoDados_C {
             str.append(arr_cond.get(i)).append("\n");
         }
         return str.toString();
+    }
+       public int VerifNIFCond(int NIF){
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getNIF() == NIF){
+                return 0;
+            }
+        }
+        return -1;
+    }
+     public int VerifTelefoneCond(int telefone){
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getTelefone() == telefone){
+                return 0;
+            }
+        }
+        return -1;
+    }
+     public int VerifCartaCond(int cartacond){
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getNumcartacond() == cartacond){
+                return 0;
+            }
+        }
+        return -1;
+    
     }
     
     public Condutor_C Obtercondxposarr(int pos){
