@@ -345,28 +345,31 @@ public class GestaoDados_C {
     public String PrecototAlugxAno(){
         Calendar dataIni;
         Calendar dataFim;
+        int anoi = 0;
+        int anof = 0;
         int i, j;
         double prectot = 0;
         int x = 0;
         StringBuilder str = new StringBuilder("");
         
         for (j = 0; j < arr_alug.size(); j++) {
-            dataIni = arr_alug.get(j).getDiaentregaHora();
+            anoi = arr_alug.get(j).getDiaentregaHora().get(Calendar.YEAR);
             for (i = 0; i < arr_alug.size(); i++) {
+                anof = arr_alug.get(i).getDiaentregaHora().get(Calendar.YEAR);
                 //verifica se ja foi obtido o preco total de uma data
-                if(i > 0 && (dataIni.get(Calendar.YEAR) == arr_precxano.get(i).getAno().get(Calendar.YEAR))){
-                    break;
-                }
-                dataFim = arr_alug.get(i).getDiaentregaHora();
+//                if(i > j && (anoi == anof)){
+//                    break;
+//                }
+                
                 //Encontra outros alugueres com a mesma data e soma o preco
-                if(dataIni.get(Calendar.YEAR) - dataFim.get(Calendar.YEAR) == 0){
+                if(anoi - anof == 0){
                     prectot += arr_alug.get(i).getPreco();
                     x = 1;
                 }
             }
             //So se foram encontrados alugueres com datas iguais
             if(x == 1){
-                arr_precxano.get(j).setAno(dataIni);
+                arr_precxano.get(j).setAno(anoi);
                 arr_precxano.get(j).setPreco(prectot);
                 str.append(arr_precxano.get(j)).append("\n");
             }
@@ -444,17 +447,7 @@ public class GestaoDados_C {
     
     //FICHEIROS
     
-    public void SalvarDadosTxt() {
-//        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Dados.txt"));
-//        out.writeObject(arr_alug);
-//        out.writeObject(arr_cond);
-//        out.writeObject(arr_func);
-//        out.writeObject(arr_numalugxmes);
-//        out.writeObject(arr_opalug);
-//        out.writeObject(arr_precxano);
-//        out.writeObject(arr_tipov);
-//        out.writeObject(arr_veic);
-        
+    public void SalvarDadosTxt() {  
         try
         {
             FileOutputStream wrt = new FileOutputStream("dados.txt");
