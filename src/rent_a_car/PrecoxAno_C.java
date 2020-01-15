@@ -15,9 +15,10 @@ import java.util.GregorianCalendar;
  */
 public class PrecoxAno_C implements Serializable{
     private double preco = 0;
-    private Calendar ano = new GregorianCalendar();
-
-    public PrecoxAno_C(double preco, Calendar ano) {
+    //private Calendar ano = new GregorianCalendar();
+    private int ano;
+    
+    public PrecoxAno_C(double preco, int ano) {
         this.preco = preco;
         this.ano = ano;
     }
@@ -39,20 +40,20 @@ public class PrecoxAno_C implements Serializable{
     /**
      * @return the ano
      */
-    public Calendar getAno() {
+    public int getAno() {
         return ano;
     }
 
     /**
      * @param ano the ano to set
      */
-    public void setAno(Calendar ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
     @Override
     public String toString() {
-        return "Ano: " + ano.get(Calendar.YEAR) + "Preco: " + preco;
+        return "Ano: " + ano + "Preco: " + preco;
     }
     
     
