@@ -99,7 +99,7 @@ public class GestaoDados_C {
      * Metodo que permite devolver o tipo de veiculo a depender 
      * da posiçao solicitada.
      * @param pos valor que determina a posiçao do array arr_tipov
-     * @return 
+     * @return objeto tipo de veiculo
      */
     public TipoVeiculo_C ObterTipoVeicPorNum(int pos) {
         return arr_tipov.get(pos);
@@ -108,7 +108,7 @@ public class GestaoDados_C {
     /**
      * Metodo que devolve a cantidad de 
      * posiçoes utilizadas do array arr_tipov
-     * @return 
+     * @return devolve o tamanho do array
      */
     public int getTotalTiposVeic() {
         return arr_tipov.size();
@@ -117,7 +117,7 @@ public class GestaoDados_C {
     /**
      * Metodo que devolve a cantidad de posiçoes utilizadas
      * do array arr_veic
-     * @return 
+     * @return devolve o tamanho do array
      */
     public int getTotalVeic(){
         return arr_veic.size();
@@ -156,7 +156,7 @@ public class GestaoDados_C {
      * com cada matricula já registrada no array arr_veic
      * e se sao iguais, devolve um valor de 0
      * @param matricula variable que tem o valor da matricula
-     * @return 
+     * @return valor real
      */
     public int VerifMatriculaUnica(int matricula){
         for (int i = 0; i < arr_veic.size(); i++) {
@@ -168,9 +168,12 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @param matricula
-     * @return 
+     * Metodo que recebe o valor da matricula, e depois compara se
+     * os valores da matricula dentro do array arr_veic é igual 
+     * á variable recebida, se é igual, devolve o valor da posiçao
+     * onde se encontra a matricula.
+     * @param matricula valor da matricula
+     * @return Valor real
      */
     public int ObterVeiculoxMatr(int matricula){
         for (int i = 0; i < arr_veic.size(); i++) {
@@ -181,16 +184,31 @@ public class GestaoDados_C {
         return -1;
     }
     
+    /**
+     * Metodo que recebe um int pos e devolve o veiculo C
+     * que se encontra na posiçao dada pelo int pos
+     * @param pos valor que indica a posiçao
+     * @return Objeto veiculo c
+     */
     public Veiculo_C ObterVeicxposarr(int pos){
         return arr_veic.get(pos);
     }
     
     //FUNCIONARIOS
     
+    /**
+     * Recebe um objeto funcionario_c f e guarda num
+     * arr_func.
+     * @param f objeto funcionario_c f
+     */
     public void NovoFuncioanrio(Funcionario_C f){
         arr_func.add(f);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String ListarTodosFunc(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_func.size(); i++) {
@@ -198,52 +216,101 @@ public class GestaoDados_C {
         }
         return str.toString();
     }
-      public int VerifNIFFunc(int NIF){
+    
+    /**
+     * Recebe o int NIF_func do funcionario e compara com 
+     * todos os valores NIF de cada funcionario dentro do
+     * arr_cond, se algum NIF é igual ao NIF_func, devolve 
+     * um valor 0
+     * @param NIF_func variable int que representa o NIF do funcionario
+     * @return Valor real
+     */
+     public int VerifNIFFunc(int NIF_func){
         for (int i = 0; i < arr_func.size(); i++) {
-            if(arr_func.get(i).getNIF() == NIF){
+            if(arr_func.get(i).getNIF() == NIF_func){
                 return 0;
             }
         }
         return -1;
     }
-    public int VerifNIFFunc_Cond(int NIF){
+    
+    /**
+     * Recebe o int NIF_func do funcionario e compara com 
+     * todos os valores NIF de cada conductor dentro do
+     * arr_func, se algum NIF é igual ao NIF_func, devolve 
+     * um valor 0 
+     * @param NIF_func variable int que representa o NIF do funcionario
+     * @return valor real
+     */
+    public int VerifNIFFunc_Cond(int NIF_func){
            for (int i = 0; i < arr_cond.size(); i++){
-               if(arr_cond.get(i).getNIF() == NIF){
+               if(arr_cond.get(i).getNIF() == NIF_func){
                    return 0;
                }
            }
            return -1;
        }
     
-    public int VerifTelefoneFunc(int telefone){
+    /**
+     * Recebe o int telefone_func do funcionario e compara com 
+     * todos os valores de telefone de cada funcionario dentro do
+     * arr_func, se algum telefone é igual ao telefone_func, devolve 
+     * um valor 0
+     * @param telefone_func variable int que representa o telefone do funcionario
+     * @return valor real
+     */
+    public int VerifTelefoneFunc(int telefone_func){
         for (int i = 0; i < arr_func.size(); i++) {
-            if(arr_func.get(i).getTelefone() == telefone){
-                return 0;
-            }
-        }
-        return -1;
-    }
-     public int VerifTelefoneFunc_Cond(int telefone){
-        for (int i = 0; i < arr_cond.size(); i++) {
-            if(arr_cond.get(i).getTelefone() == telefone){
+            if(arr_func.get(i).getTelefone() == telefone_func){
                 return 0;
             }
         }
         return -1;
     }
     
+    /**
+     * Recebe o int telefone_func do funcionario e compara com 
+     * todos os valores de telefone de cada conductor dentro do
+     * arr_cond, se algum telefone do conductor é igual ao telefone_func,
+     * devolve um valor 0
+     * @param telefone_func variable int que representa o telefone do funcionario
+     * @return valor real
+     */
+     public int VerifTelefoneFunc_Cond(int telefone_func){
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getTelefone() == telefone_func){
+                return 0;
+            }
+        }
+        return -1;
+    }
+    
+     /**
+      * Metodo que devolve o o tamanho do array funcionario
+      * @return devolve o tamanho do array
+      */
     public int getTotalFunc(){
         return arr_func.size();
     }
     
     //CONDUTORES
     
+    /**
+     * Recebe um objeto conductor_c c e guarda num
+     * arr_cond.
+     * @param c objeto conductor_c c
+     */
     public void NovoCondutor(Condutor_C c){
         
         arr_cond.add(c);
         
     }
     
+    /**
+     * 
+     * @param NIF
+     * @return 
+     */
     public String MostrarCondutorxNIF(int NIF){
         
         //StringBuilder str = new StringBuilder("");
@@ -255,19 +322,35 @@ public class GestaoDados_C {
         return "N";
     }
     
-    public int ObterCondutorxNIF(int NIF){
+    /**
+     * Recebe o int NIF_cond, depois compara os valores NIF 
+     * dentro do arr_cond com o NIF_cond, e sao iguais
+     * devolve o a posiçaos onde esta o NIF igual.
+     * @param NIF_cond valor NIF recebido
+     * @return valor real 
+     */
+    public int ObterCondutorxNIF(int NIF_cond){
         for (int i = 0; i < arr_cond.size(); i++) {
-            if(arr_cond.get(i).getNIF() == NIF){
+            if(arr_cond.get(i).getNIF() == NIF_cond){
                 return i;
             }
         }
         return -1;
     }
     
+    /**
+     * Metodo que deolve o tamanho do array
+     * arr_cond.
+     * @return tamanho do array
+     */
     public int getTotalCond(){
         return arr_cond.size();
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String ListarTodosCond(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_cond.size(); i++) {
@@ -275,41 +358,86 @@ public class GestaoDados_C {
         }
         return str.toString();
     }
-       public int VerifNIFCond(int NIF){
+    
+    
+    /**
+     * Recebe o int NIF_cond do conductor e compara com 
+     * todos os valores NIF de cada conductor dentro do
+     * arr_cond, se algum NIF dos conductores é igual ao NIF_cond, devolve 
+     * um valor 0 
+     * @param NIF_cond variable int que representa o NIF do conductor
+     * @return  valor real
+     */
+       public int VerifNIFCond(int NIF_cond){
         for (int i = 0; i < arr_cond.size(); i++) {
-            if(arr_cond.get(i).getNIF() == NIF){
+            if(arr_cond.get(i).getNIF() == NIF_cond){
                 return 0;
             }
         }
         return -1;
     }
-       public int VerifNIFCond_Func(int NIF){
+       
+       /**
+        * Recebe o int NIF_cond do conductor e compara com 
+        * todos os valores NIF de cada funcionario dentro do
+        * arr_func, se algum NIF dos funcionarios é igual ao NIF_cond, devolve 
+        * um valor 0 
+        * @param NIF_cond variable int que representa o NIF do conductor
+        * @return valor real
+        */
+       public int VerifNIFCond_Func(int NIF_cond){
            for (int i = 0; i < arr_func.size(); i++){
-               if(arr_func.get(i).getNIF() == NIF){
+               if(arr_func.get(i).getNIF() == NIF_cond){
                    return 0;
                }
            }
            return -1;
        }
        
-     public int VerifTelefoneCond(int telefone){
+       /**
+        * Recebe o int telefone_cond do conductor e compara com 
+        * todos os valores de telefone de cada conductor dentro do
+        * arr_cond, se algum telefone do conductor é igual ao telefone_cond,
+        * devolve um valor 0
+        * @param telefone_cond variable int que representa o telefone do conductor
+        * @return valor real
+        */
+     public int VerifTelefoneCond(int telefone_cond){
         for (int i = 0; i < arr_cond.size(); i++) {
-            if(arr_cond.get(i).getTelefone() == telefone){
+            if(arr_cond.get(i).getTelefone() == telefone_cond){
                 return 0;
             }
         }
         return -1;
     }
-     
-     public int VerifTelefoneCond_Func(int telefone){
+    
+     /**
+      * Recebe o int telefone_cond do conductor e compara com 
+      * todos os valores de telefone de cada funcionario dentro do
+      * arr_func, se algum telefone do funcionario é igual ao telefone_cond,
+      * devolve um valor 0
+      * @param telefone_cond variable int que representa o telefone do conductor
+      * @return 
+      */
+    public int VerifTelefoneCond_Func(int telefone_cond){
         for (int i = 0; i < arr_func.size(); i++) {
-            if(arr_func.get(i).getTelefone() == telefone){
+            if(arr_func.get(i).getTelefone() == telefone_cond){
                 return 0;
             }
         }
         return -1;
     }
-     
+    
+    /**
+     * Recebe o int cartacond do conductor e compara com 
+     * todos os valores da carta de conduçao de 
+     * cada conductor dentro do arr_cond, 
+     * se alguma carta de conduçao do conductor é igual ao cartacond,
+     * devolve um valor 0
+     * @param cartacond variable int que representa 
+     * o numero da carta de conduçao do conductor
+     * @return valor real
+     */
      public int VerifCartaCond(int cartacond){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getNumcartacond() == cartacond){
