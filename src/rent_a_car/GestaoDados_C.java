@@ -9,6 +9,7 @@ import java.awt.AWTEventMulticaster;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 import util.Consola;
 
 /**
@@ -23,6 +24,8 @@ public class GestaoDados_C {
     ArrayList<TipoVeiculo_C> arr_tipov = new ArrayList<>(); //Array dos tipos de veiculos
     ArrayList<Opcao_aluguel_C> arr_opalug = new ArrayList<>(); // Array das opcoes de aluguel
     ArrayList<Aluguer_C> arr_alug = new ArrayList<>(); // Array dos alug.
+    ArrayList<PrecoxAno_C> arr_precxano = new ArrayList<>(); // Array do preco total por ano
+    ArrayList<NumAlugxMesemAnok_C> arr_numalugxmes = new ArrayList<>(); // Array do numero de alugueres por mes em um ano especifico
         
     //VEICULOS & TIPO DE VEICULOS
 
@@ -287,13 +290,95 @@ public class GestaoDados_C {
         return j;
     }
     
-    //PRECO ALUG/ANO
-//    public float PrecototAlugxAno(){
-//        for (int i = 0; i < arr_alug.size(); i++) {
-//            if(arr_alug.get(i).getDiaentregaHora())
-//        }
-//        
-//    }
+    public String PrecototAlugxAno(){
+        Calendar dataIni;
+        Calendar dataFim;
+        int i, j;
+        double prectot = 0;
+        StringBuilder str = new StringBuilder("");
+        
+        for (j = 0; j < arr_alug.size(); j++) {
+            dataIni = arr_alug.get(j).getDiaentregaHora();
+            for (i = 0; i < arr_alug.size(); i++) {
+                dataFim = arr_alug.get(i).getDiaentregaHora();
+                    if(dataIni.get(Calendar.YEAR) - dataFim.get(Calendar.YEAR) == 0){
+                        prectot += arr_alug.get(i).getPreco();
+                    }
+            }
+            arr_precxano.get(j).setAno(dataIni);
+            arr_precxano.get(j).setPreco(prectot);
+            str.append(arr_precxano.get(j)).append("\n");
+        }    
+        return str.toString();
+    }
+    
+    public String NumAlugxMes(int ano){
+        int conta1 = 0;
+        int conta2 = 0,conta3 = 0,conta4 = 0,conta5 = 0,conta6 = 0,conta7 = 0,conta8 = 0,conta9 = 0,conta10 = 0,conta11 = 0,conta12 = 0;
+        for (int i = 0; i < arr_alug.size(); i++) {
+            //Encontra o ano
+            if(arr_alug.get(i).getDiaentregaHora().get(Calendar.YEAR) == ano){
+                //Encontra o mes do aluguel
+                //Aumenta a conta do mes do aluguel
+                //O mes fica salvado na posicao do array arr_numalugxmes
+                switch(arr_alug.get(i).getDiaentregaHora().get(Calendar.MONTH)+1){
+                    case 1:
+                        arr_numalugxmes.get(0).setNumerodealug(conta1++);
+                        arr_numalugxmes.get(0).setMes("Janeiro");
+                        break;
+                    case 2:
+                        arr_numalugxmes.get(0).setNumerodealug(conta2++);
+                        arr_numalugxmes.get(0).setMes("Fevereiro");
+                        break;
+                    case 3:
+                        arr_numalugxmes.get(0).setNumerodealug(conta3++);
+                        arr_numalugxmes.get(0).setMes("Marco");
+                        break;
+                    case 4:
+                        arr_numalugxmes.get(0).setNumerodealug(conta4++);
+                        arr_numalugxmes.get(0).setMes("Abril");
+                        break;
+                    case 5:
+                        arr_numalugxmes.get(0).setNumerodealug(conta5++);
+                        arr_numalugxmes.get(0).setMes("Maio");
+                        break;
+                    case 6:
+                        arr_numalugxmes.get(0).setNumerodealug(conta6++);
+                        arr_numalugxmes.get(0).setMes("Junho");
+                        break;
+                    case 7:
+                        arr_numalugxmes.get(0).setNumerodealug(conta7++);
+                        arr_numalugxmes.get(0).setMes("Julio");
+                        break;
+                    case 8:
+                        arr_numalugxmes.get(0).setNumerodealug(conta8++);
+                        arr_numalugxmes.get(0).setMes("Agosto");
+                        break;
+                    case 9:
+                        arr_numalugxmes.get(0).setNumerodealug(conta9++);
+                        arr_numalugxmes.get(0).setMes("Setembro");
+                        break;
+                    case 10:
+                        arr_numalugxmes.get(0).setNumerodealug(conta10++);
+                        arr_numalugxmes.get(0).setMes("Outubro");
+                        break;
+                    case 11:
+                        arr_numalugxmes.get(0).setNumerodealug(conta11++);
+                        arr_numalugxmes.get(0).setMes("Novembro");
+                        break;
+                    case 12:
+                        arr_numalugxmes.get(0).setNumerodealug(conta12++);
+                        arr_numalugxmes.get(0).setMes("Dezembro");
+                        break;
+                }
+            }
+        }
+        StringBuilder str = new StringBuilder("");
+        for (int i = 0; i < 10; i++) {
+            str.append(arr_numalugxmes.get(i)).append("\n");
+        }
+        return str.toString();
+    }
     
     
 }

@@ -251,6 +251,7 @@ public class Rent_a_car {
                     TotalVeicAlug();
                     break;
                 case 3:
+                    PrecoTotalAlugporAno();
                     //Falta
                     break;
                 case 4:
@@ -738,8 +739,22 @@ public class Rent_a_car {
     }
     
     public static void PrecoTotalAlugporAno(){
-        
+        if(gd.getTotalAl() != 0){
+            System.out.println(gd.PrecototAlugxAno());
+        }else
+            System.out.println("Nao ha alugueres registrados!");
     }
+    
+    public static void NumAlugxMesAno(){
+        if(gd.getTotalAl() != 0){
+            //Calendar dataesc = new GregorianCalendar();
+            int ano = Consola.lerInt("Cual e o ano? ", 1900, 2112);
+            //dataesc.set(ano, 0, 0);
+            System.out.println("Numero de alugueres registrados no ano "+ ano + gd.PrecototAlugxAno());
+        }else
+            System.out.println("Nao ha alugueres registrados!");
+    }   
+    
     
     
 }
