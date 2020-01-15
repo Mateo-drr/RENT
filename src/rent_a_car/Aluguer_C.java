@@ -225,7 +225,7 @@ public class Aluguer_C implements Serializable{
 
     @Override
     public String toString() {
-        return numero+ "-" +tipoaluger + "-" + locallevant + "-" + localentrega + "-" + condutor + "-" + veiculo + "-" + numpessoas + "-" + caractreserva + "-" + preco;
+        return " " +numero + "\nTipo de alugel: " +tipoaluger + "\nLocla de levantamento: " + locallevant + "\nLocal de entrega: " + localentrega + "\nCondutuor: " + condutor + "\nVeiculo: " + veiculo + "\nNumero de pessoas: " + numpessoas + "\nCaracterisica de reserva: " + caractreserva + "\nPreço: " + preco;
     }
     
     

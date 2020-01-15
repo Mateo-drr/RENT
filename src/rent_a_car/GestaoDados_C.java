@@ -15,9 +15,13 @@ import java.util.GregorianCalendar;
 import util.Consola;
 
 /**
- *
- * @author Mateo
+ * Classe que faz a gestao dos daddos entre a classe principal
+ * e as demais classes.
+ * 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
+
 public class GestaoDados_C {
 
     ArrayList<Funcionario_C> arr_func = new ArrayList<>(); //Array dos funcionarios
@@ -30,7 +34,10 @@ public class GestaoDados_C {
     ArrayList<NumAlugxMesemAnok_C> arr_numalugxmes = new ArrayList<>(); // Array do numero de alugueres por mes em um ano especifico
         
     //VEICULOS & TIPO DE VEICULOS
-
+/**
+ * 
+ * @param tv 
+ */
     public void NovoTipoVeiculo(TipoVeiculo_C tv) {
         tv.setNumero(arr_tipov.size() + 1);
         arr_tipov.add(tv);

@@ -22,7 +22,7 @@ public class Funcionario_C extends Pessoa_C implements Serializable{
 
     @Override
     public String toString() {
-        return super.toString() + funcao; //To change body of generated methods, choose Tools | Templates.
+        return super.toString() + "\nFunçao: " + funcao; //To change body of generated methods, choose Tools | Templates.
     }
    
     

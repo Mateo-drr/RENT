@@ -561,10 +561,14 @@ public class Rent_a_car {
                 System.out.println(gd.MostrarCondutorxNIF(findNIF));
                 //System.out.println(gd.ObterCondutorxNIF(findNIF));
                 int i = gd.ObterCondutorxNIF(findNIF);
-                Condutor_C cond = gd.Obtercondxposarr(i);
-                System.out.println("Alugueres \n:");
-                System.out.print(gd.ListarAlugxCond(cond));
-        }else
+                if( i == -1 ){
+                    System.out.println("NIF nao encontrado!");
+                }else{
+                    Condutor_C cond = gd.Obtercondxposarr(i);
+                    System.out.print("Alugueres:");
+                    System.out.print(gd.ListarAlugxCond(cond));
+                }
+            }else
             System.out.println("Nao a condutores registrados!");
     }
     
@@ -712,7 +716,7 @@ public class Rent_a_car {
         
         System.out.println("Estados dos alugueres:");
         do{
-            tipoal = Consola.lerInt("1.Reservado\n2.inciado\n3.cancelado\n4.terminado", 1, 4);
+            tipoal = Consola.lerInt("1.Reservado\n2.inciado\n3.cancelado\n4.terminado\nOpçao: ", 1, 4);
             if(tipoal > 4 && tipoal < 1)
                 System.out.println("Estado nao existente!");
         }while(tipoal > 4 && tipoal < 1);
@@ -913,7 +917,7 @@ public class Rent_a_car {
     }   
     
     public static void CarregarDados(){
-        int i = Consola.lerInt("Deseja carregar os dados anteriores? (1.sim) (0.nao)", 0, 1);
+        int i = Consola.lerInt("Deseja carregar os dados anteriores? (1.sim) (0.nao): ", 0, 1);
         if(i == 1){
             gd.LerdadosTxt();
             System.out.println("Dados carregados!");

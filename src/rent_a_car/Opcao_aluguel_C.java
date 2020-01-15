@@ -82,7 +82,7 @@ public class Opcao_aluguel_C implements Serializable{
 
     @Override
     public String toString() {
-        return num + "-" + nome + "-" + descri + "-" + preco; //To change body of generated methods, choose Tools | Templates.
+        return "Numero: " + num + "\nNome: " + nome + "\nDescriçao: " + descri + "\nPreço: " + preco; //To change body of generated methods, choose Tools | Templates.
     }
     
     

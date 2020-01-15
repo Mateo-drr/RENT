@@ -51,7 +51,7 @@ public class VeiculoLigeiro_C extends Veiculo_C implements Serializable{
 
     @Override
     public String toString() {
-        return super.toString() + "\nCapacidade de baggagem: " + capbaggagem +  "\nNumero portas" + numportas ; //To change body of generated methods, choose Tools | Templates.
+        return super.toString() + "\nCapacidade de baggagem: " + capbaggagem +  "\nNumero portas: " + numportas ; //To change body of generated methods, choose Tools | Templates.
     }
     
     
