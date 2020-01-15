@@ -5,6 +5,7 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -12,7 +13,7 @@ import java.util.Calendar;
  *
  * @author Mateo
  */
-public class Aluguer_C{
+public class Aluguer_C implements Serializable{
     
     private int tipoaluger; //1 reservado 2 inciado 3 cancelado 4 terminado
     private String locallevant;

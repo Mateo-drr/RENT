@@ -2,6 +2,12 @@
 package rent_a_car;
 
 import java.awt.AWTEventMulticaster;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -341,19 +347,29 @@ public class GestaoDados_C {
         Calendar dataFim;
         int i, j;
         double prectot = 0;
+        int x = 0;
         StringBuilder str = new StringBuilder("");
         
         for (j = 0; j < arr_alug.size(); j++) {
             dataIni = arr_alug.get(j).getDiaentregaHora();
             for (i = 0; i < arr_alug.size(); i++) {
+                //verifica se ja foi obtido o preco total de uma data
+                if(i > 0 && (dataIni.get(Calendar.YEAR) == arr_precxano.get(i).getAno().get(Calendar.YEAR))){
+                    break;
+                }
                 dataFim = arr_alug.get(i).getDiaentregaHora();
-                    if(dataIni.get(Calendar.YEAR) - dataFim.get(Calendar.YEAR) == 0){
-                        prectot += arr_alug.get(i).getPreco();
-                    }
+                //Encontra outros alugueres com a mesma data e soma o preco
+                if(dataIni.get(Calendar.YEAR) - dataFim.get(Calendar.YEAR) == 0){
+                    prectot += arr_alug.get(i).getPreco();
+                    x = 1;
+                }
             }
-            arr_precxano.get(j).setAno(dataIni);
-            arr_precxano.get(j).setPreco(prectot);
-            str.append(arr_precxano.get(j)).append("\n");
+            //So se foram encontrados alugueres com datas iguais
+            if(x == 1){
+                arr_precxano.get(j).setAno(dataIni);
+                arr_precxano.get(j).setPreco(prectot);
+                str.append(arr_precxano.get(j)).append("\n");
+            }
         }    
         return str.toString();
     }
@@ -426,5 +442,67 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    //FICHEIROS
+    
+    public void SalvarDadosTxt() {
+//        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Dados.txt"));
+//        out.writeObject(arr_alug);
+//        out.writeObject(arr_cond);
+//        out.writeObject(arr_func);
+//        out.writeObject(arr_numalugxmes);
+//        out.writeObject(arr_opalug);
+//        out.writeObject(arr_precxano);
+//        out.writeObject(arr_tipov);
+//        out.writeObject(arr_veic);
+        
+        try
+        {
+            FileOutputStream wrt = new FileOutputStream("dados.txt");
+            ObjectOutputStream out = new ObjectOutputStream(wrt);
+            out.writeObject(arr_tipov);
+            out.writeObject(arr_veic);
+            out.writeObject(arr_func);
+            out.writeObject(arr_cond);
+            out.writeObject(arr_opalug);
+            out.writeObject(arr_alug);
+            out.close();
+            wrt.close();
+        } 
+        catch (IOException ioe) 
+        {
+            ioe.printStackTrace();
+        }
+        
+        
+        
+    }
+    
+    public void LerdadosTxt(){
+        try
+        {
+            FileInputStream read = new FileInputStream("dados.txt");
+            ObjectInputStream in = new ObjectInputStream(read);
+ 
+            arr_tipov = (ArrayList) in.readObject();
+            arr_veic = (ArrayList) in.readObject();
+            arr_func = (ArrayList) in.readObject();
+            arr_cond = (ArrayList) in.readObject();
+            arr_opalug = (ArrayList) in.readObject();
+            arr_alug = (ArrayList) in.readObject();
+            in.close();
+            read.close();
+        } 
+        catch (IOException ioe) 
+        {
+            ioe.printStackTrace();
+            return;
+        } 
+        catch (ClassNotFoundException c) 
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+            return;
+        }
+    }
     
 }

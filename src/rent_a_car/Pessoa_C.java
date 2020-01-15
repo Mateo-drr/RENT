@@ -5,11 +5,13 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa uma pessoa (abstracta)
  * @author Mateo
  */
-public abstract class Pessoa_C {
+public abstract class Pessoa_C implements Serializable{
     
     private int NIF;
     private String nome;

@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package rent_a_car;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Mateo
  */
-public class Veiculo_C{
+public class Veiculo_C implements Serializable{
     
     private int matricula;
     private int numpessoas;

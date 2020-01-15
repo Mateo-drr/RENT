@@ -5,6 +5,7 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author Mateo
  */
-public class PrecoxAno_C {
+public class PrecoxAno_C implements Serializable{
     private double preco = 0;
     private Calendar ano = new GregorianCalendar();
 

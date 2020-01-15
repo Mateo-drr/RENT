@@ -5,6 +5,7 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  * Classe que representa um condutor
  * @author Mateo
  */
-public class Condutor_C extends Pessoa_C{
+public class Condutor_C extends Pessoa_C implements Serializable{
 
     private int numcartacond;
     //private String datacartcond;

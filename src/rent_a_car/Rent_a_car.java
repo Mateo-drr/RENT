@@ -39,6 +39,8 @@ public class Rent_a_car {
         int op;     //opcao a escolher do menu principal
         int opsub = -1;  //opcao a escolher nos submenus
         
+        CarregarDados();
+        
         do {
             op = menu();
             switch (op) {
@@ -58,6 +60,7 @@ public class Rent_a_car {
                     menuCase5(opsub);
                     break;
                 case 0:
+                    gd.SalvarDadosTxt();
                     System.out.println("O programa terminou...");
             }
             if (op != 0) {
@@ -315,6 +318,7 @@ public class Rent_a_car {
                     //Falta
                     break;
                 case 4:
+                    NumAlugxMesAno();
                     //Falta
                     break;
                 case 0:
@@ -908,6 +912,13 @@ public class Rent_a_car {
             System.out.println("Nao ha alugueres registrados!");
     }   
     
-    
+    public static void CarregarDados(){
+        int i = Consola.lerInt("Deseja carregar os dados anteriores? (1.sim) (0.nao)", 0, 1);
+        if(i == 1){
+            gd.LerdadosTxt();
+            System.out.println("Dados carregados!");
+        }
+            
+    }
     
 }
