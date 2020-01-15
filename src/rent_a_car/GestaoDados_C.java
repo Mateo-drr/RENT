@@ -167,6 +167,11 @@ public class GestaoDados_C {
         return -1;
     }
     
+    /**
+     * 
+     * @param matricula
+     * @return 
+     */
     public int ObterVeiculoxMatr(int matricula){
         for (int i = 0; i < arr_veic.size(); i++) {
             if(arr_veic.get(i).getMatricula() == matricula){
