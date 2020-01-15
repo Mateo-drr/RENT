@@ -48,10 +48,8 @@ public class GestaoDados_C {
     }
     
     /**
-     * Metodo para copiar cada toString de cada objeto
-     * do array arr_tipov, logo devolve o str
-     * e o imprime.
-     * @return 
+     * Metodo que lista todos os tipos de veiculos do arr_tipov
+     * @return String do toString da clase TipoVeiculo_C,
      */
     
     public String ListarTodosTiposVeiculos() {
@@ -64,12 +62,12 @@ public class GestaoDados_C {
     }
     
     /**
-     * Metodo que verifica que o numero de 
-     * tipo de veiculo nao se repita, porque compara
-     * cada posiçao do array arr_tipov e se é igual
-     * entao devolve o valor 0.
-     * @param numero
-     * @return 
+     * Metodo que verifica que o numero do 
+     * tipo de veiculo ja exista, porque compara
+     * o numero do tipo de veiculo de cada cada posiçao
+     * do arr_tipov com o numero recebido
+     * @param numero inteiro do numero de tipo de veiculo
+     * @return int 0 ou -1, utilizado na logica do metodo InserirVeic na main
      */
     public int VerifNumerotipoveic(int numero) {
         for (int i = 0; i < arr_tipov.size(); i++) {
@@ -124,9 +122,9 @@ public class GestaoDados_C {
     }
     
     /**
-     * Recebe um veiculo, e é guardado em
-     * cada posiçao do arrar arr_veic.
-     * @param v variable que representa o veiculo
+     * Recebe um veiculo salva o veiculo no arr_veic, 
+     * e no arr_veic_tv.
+     * @param v objeto do tipo Veiculo_C
      */
     public void NovoVeiculo(Veiculo_C v) {
         arr_veic.add(v);
@@ -135,20 +133,25 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @param tipo
-     * @return 
+     * Metodo que cria o string dos toString dos veiculos
+     * dum tipo especifico
+     * @param tipo String que especifica o tipo de veiculo a procurar
+     * @return String do toString da classe TipoVeiculo_C, so dos especificados
      */
     public String ObterVeiculosPorTipo(String tipo){
-        StringBuilder str = new StringBuilder("");
+        //StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_tipov.size(); i++) {
             if(arr_tipov.get(i).getDescricao().equalsIgnoreCase(tipo)){
-                for (int j = 0; j < arr_tipov.get(i).getArr_veic_tv().size(); j++) {
-                    str.append(arr_tipov.get(i).getArr_veic_tv().get(j).toString()).append("\n");
-                }
+                return arr_tipov.get(i).ListarTodosVeiculos();// <---------------------------------------------
+//                for (int j = 0; j < arr_tipov.get(i).getArr_veic_tv().size(); j++) {
+//                    str.append(arr_tipov.get(i).getArr_veic_tv().get(j).toString()).append("\n");
+//                }
+//            }
+//        }
+//        return str.toString();
             }
         }
-        return str.toString();
+        return " ";
     }
     
     /**
@@ -171,7 +174,7 @@ public class GestaoDados_C {
      * Metodo que recebe o valor da matricula, e depois compara se
      * os valores da matricula dentro do array arr_veic é igual 
      * á variable recebida, se é igual, devolve o valor da posiçao
-     * onde se encontra a matricula.
+     * onde se encontra o veiculo com aquela matricula.
      * @param matricula valor da matricula
      * @return Valor real
      */
@@ -192,6 +195,15 @@ public class GestaoDados_C {
      */
     public Veiculo_C ObterVeicxposarr(int pos){
         return arr_veic.get(pos);
+    }
+    
+    public int VerifDesigTipoVeic(String designacao){
+        for (int i = 0; i < arr_tipov.size(); i++) {
+            if(arr_tipov.get(i).getDesignacao().equalsIgnoreCase(designacao)){
+                return 0;
+            }
+        }
+        return -1;
     }
     
     //FUNCIONARIOS
@@ -307,9 +319,9 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @param NIF
-     * @return 
+     * Metodo que pesquisa um condutor pelo nif
+     * @param NIF int numero nif colocado pelo usuario
+     * @return String do toString do condutor especificado
      */
     public String MostrarCondutorxNIF(int NIF){
         
@@ -319,13 +331,13 @@ public class GestaoDados_C {
                 return arr_cond.get(i).toString();
             }
         }
-        return "N";
+        return " ";
     }
     
     /**
      * Recebe o int NIF_cond, depois compara os valores NIF 
      * dentro do arr_cond com o NIF_cond, e sao iguais
-     * devolve o a posiçaos onde esta o NIF igual.
+     * devolve o a posiçao onde esta o NIF igual.
      * @param NIF_cond valor NIF recebido
      * @return valor real 
      */
@@ -348,8 +360,8 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo que mostra todos os condutores do arr_cond
+     * @return String dos toString da classe Condutor_C
      */
     public String ListarTodosCond(){
         StringBuilder str = new StringBuilder("");
@@ -569,6 +581,29 @@ public class GestaoDados_C {
      */
     public Aluguer_C ObterAlugxNum(int num){
         return arr_alug.get(num-1);
+    }
+    
+    public int VerifDatas(Calendar DeHE, Calendar DeHL){
+        if(DeHE.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
+            if(DeHE.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
+                if(DeHE.get(Calendar.DATE) - DeHL.get(Calendar.DATE) > 0){
+                    return 0;
+                }
+            }
+        }
+        return -1;
+    }
+    
+    public int VerifDataCartCond(Calendar DeHL, Calendar DCC){
+        if(DCC.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
+            if(DCC.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
+                //Diferenca minima entre a data do cartao de conducao e a data de levantamento do veiculo e considerada de 30 dias
+                if(DCC.get(Calendar.DAY_OF_YEAR) - DeHL.get(Calendar.DAY_OF_YEAR) >= 30){
+                    return 0;
+                }
+            }
+        }
+        return -1;
     }
     
 //    public void CancelarAlug(int num){

@@ -336,15 +336,14 @@ public class Rent_a_car {
     public static void InserirTipoVeic(){
         
         int i=0;
-        int y;
+        int j = 0;
         String designacao;
-       // do{
-            designacao = Consola.lerString("Insira a designacao do tipo de veiculo: ");
-         //   y = gd.VerifDesignaçaoTipoveic(i);
-         //   if(y ==0)
-         //          System.out.println("Designaçao ja registrada!");
-        //}while(y == 0);
-        
+        do{
+        designacao = Consola.lerString("Insira a designacao do tipo de veiculo: ");
+        j = gd.VerifDesigTipoVeic(designacao);
+        if(j == 0)
+            System.out.println("Designacao ja registrada");
+        }while(j == 0);
         String descricao = Consola.lerString("Insira a descricao do tipo de veiculo: ");
         double preco = Consola.lerDouble("Insira o precio deste tipo de veiculo: ", 0, 10000);
         
@@ -606,6 +605,8 @@ public class Rent_a_car {
      * Permite registrar um novo aluger.
      */
     public static void RegistrarAlug(){
+        int i = 0;
+        int j = 0;
         
         if(gd.getTotalCond() != 0){
             if(gd.getTotalVeic() != 0){
@@ -648,30 +649,50 @@ public class Rent_a_car {
                 //caracteristica reserva
                 String caractreserva = Consola.lerString("Caracteristica de la reserva: ");
 
-                //Data e hora lev.
-                do {
-                    y = 0;
-                    try {
-                        datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
-                        DeHL.setTime(formatoH.parse(datay));
-                    } catch (ParseException e) {
-                        y = 1;
-                        System.err.println("Data e hora com formato inválido!");
-                    }
-                } while (y == 1);
+                //Data e hora lev e ent.
+                do{
+                    //Data e hora lev.
+                    do {
+                        y = 0;
+                        try {
+                            datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
+                            DeHL.setTime(formatoH.parse(datay));
+                        } catch (ParseException e) {
+                            y = 1;
+                            System.err.println("Data e hora com formato inválido!");
+                        }
+                    } while (y == 1);
 
-                //Data e hora ent.
-                do {
-                    y = 0;
-                    try {
-                        datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
-                        DeHE.setTime(formatoH.parse(datay));
-                    } catch (ParseException e) {
-                        y = 1;
-                        System.err.println("Data e hora com formato inválido!");
+                    //Data e hora ent.
+                    do {
+                        y = 0;
+                        try {
+                            datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
+                            DeHE.setTime(formatoH.parse(datay));
+                        } catch (ParseException e) {
+                            y = 1;
+                            System.err.println("Data e hora com formato inválido!");
+                        }
+                    } while (y == 1);
+                    //verificacao que a data de entrega nao seja menor a data de levantamento
+                    i = gd.VerifDatas(DeHE, DeHL);
+                    if(i == -1){
+                        System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
+                    }else{
+                        j = gd.VerifDataCartCond(DeHL, cond.getDatacartcond());
+                        if(j == -1){
+                            System.out.println("Data de validade do cartao nao e igual ou superior aos 30 dias da data do leventamento");
+                            int k = Consola.lerInt("Deseja mudar a data de levantamento(1) ou cancelar o aluguer(0): ", 0,1);
+                            if(k == 0){
+                                i = 2;
+                                j = 2;
+                            }
+                        }
                     }
-                } while (y == 1);
-
+                }while(i == -1 || j == -1);
+                
+                //Se foi escolhido cancelar o aluguer nao salva os dados e sai do metodo
+                if(i != 2 && j != 2){
                 //tipo de aluguer = 1. reservado
                 int tipal = 1;
 
@@ -697,7 +718,11 @@ public class Rent_a_car {
 
                 //Salvar aluguer criado
                 gd.NovoAluguer(al);
-        
+                
+                }else{
+                    System.out.println("Alguel cancelado");
+                }
+                
         } else{
                 System.out.println("Nao ha veiculos registrado");
             }
@@ -728,7 +753,7 @@ public class Rent_a_car {
      * do levantamento do veiculo.
      */
     public static void AlterarDeHL(){
-        
+        int i = 0;
         int y;
         String datay;
         Calendar DeHL = new GregorianCalendar();
@@ -741,16 +766,21 @@ public class Rent_a_car {
         int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de levantamento: ", 1, gd.getTotalAl());
         Aluguer_C al = gd.ObterAlugxNum(numero);
         
-        do {
-            y = 0;
-            try {
-                datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
-                DeHL.setTime(formatoH.parse(datay));
-            } catch (ParseException e) {
-                y = 1;
-                System.err.println("Data e hora com formato inválido!");
-            }
-        } while (y == 1);
+        do{
+            do {
+                y = 0;
+                try {
+                    datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
+                    DeHL.setTime(formatoH.parse(datay));
+                } catch (ParseException e) {
+                    y = 1;
+                    System.err.println("Data e hora com formato inválido!");
+                }
+            } while (y == 1);
+            i = gd.VerifDatas(al.getDiaentregaHora(), DeHL);
+            if(i == -1)
+                System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
+        }while(i == -1);
         
         al.setDialevantHora(DeHL);
         
@@ -761,6 +791,7 @@ public class Rent_a_car {
      * a entrega do veiculo.
      */
     public static void AlterarDeHE(){
+        int i = 0;
         int y;
         String datay;
         Calendar DeHE = new GregorianCalendar();
@@ -773,16 +804,21 @@ public class Rent_a_car {
         int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de entrega: ", 1, gd.getTotalAl());
         Aluguer_C al = gd.ObterAlugxNum(numero);
         
-        do {
-            y = 0;
-            try {
-                datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
-                DeHE.setTime(formatoH.parse(datay));
-            } catch (ParseException e) {
-                y = 1;
-                System.err.println("Data e hora com formato inválido!");
-            }
-        } while (y == 1);
+        do{
+            do {
+                y = 0;
+                try {
+                    datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
+                    DeHE.setTime(formatoH.parse(datay));
+                } catch (ParseException e) {
+                    y = 1;
+                    System.err.println("Data e hora com formato inválido!");
+                }
+            } while (y == 1);
+            i = gd.VerifDatas(DeHE, al.getDialevantHora());
+            if(i == -1)
+                System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
+        }while(i == -1);
         
         al.setDiaentregaHora(DeHE);
     }

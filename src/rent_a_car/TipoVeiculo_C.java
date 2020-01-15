@@ -20,10 +20,21 @@ public class TipoVeiculo_C implements Serializable{
     private double preco;
     private ArrayList<Veiculo_C> arr_veic_tv = new ArrayList<>();
 
+    /**
+     * Metodo que salva o objeto Veiculo_C v
+     * dentro do array de veiculos, do classe Tipo de veiculos
+     * Chamado na gd, no metodo NovoVeiculo
+     * @param v objeto de tipo Veiculo_C
+     */
     public void NovoVeiculo(Veiculo_C v) {
         arr_veic_tv.add(v);
     }
 
+    /**
+     * Metodo que cria o str dos toString da classe Veiculo_C
+     * que estao dentro do arr_veic_tv
+     * @return String
+     */
     public String ListarTodosVeiculos() {
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_veic_tv.size(); i++) {
