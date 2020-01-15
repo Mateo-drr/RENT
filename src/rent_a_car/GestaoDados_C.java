@@ -378,8 +378,10 @@ public class GestaoDados_C {
     }
     
     public String NumAlugxMes(int ano){
-        int conta1 = 0;
+        int conta1 = 0, j = 0;
         int conta2 = 0,conta3 = 0,conta4 = 0,conta5 = 0,conta6 = 0,conta7 = 0,conta8 = 0,conta9 = 0,conta10 = 0,conta11 = 0,conta12 = 0;
+        NumAlugxMesemAnok_C naxma = new NumAlugxMesemAnok_C(0, " ", 0);
+         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
             //Encontra o ano
             if(arr_alug.get(i).getDiaentregaHora().get(Calendar.YEAR) == ano){
@@ -388,61 +390,115 @@ public class GestaoDados_C {
                 //O mes fica salvado na posicao do array arr_numalugxmes
                 switch(arr_alug.get(i).getDiaentregaHora().get(Calendar.MONTH)+1){
                     case 1:
-                        arr_numalugxmes.get(0).setNumerodealug(conta1++);
-                        arr_numalugxmes.get(0).setMes("Janeiro");
+                        naxma.setMes("Janeiro");
+                        conta1++;
+                        naxma.setNumerodealug(conta1);
+                        naxma.setNummes(1);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 2:
-                        arr_numalugxmes.get(0).setNumerodealug(conta2++);
-                        arr_numalugxmes.get(0).setMes("Fevereiro");
+                        naxma.setMes("Fevereiro");
+                        conta2++;
+                        naxma.setNumerodealug(conta2);
+                        naxma.setNummes(2);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 3:
-                        arr_numalugxmes.get(0).setNumerodealug(conta3++);
-                        arr_numalugxmes.get(0).setMes("Marco");
+                        naxma.setMes("Marco");
+                        conta3++;
+                        naxma.setNumerodealug(conta3);
+                        naxma.setNummes(3);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 4:
-                        arr_numalugxmes.get(0).setNumerodealug(conta4++);
-                        arr_numalugxmes.get(0).setMes("Abril");
+                        naxma.setMes("Abril");
+                        conta4++;
+                        naxma.setNumerodealug(conta4);
+                        naxma.setNummes(4);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 5:
-                        arr_numalugxmes.get(0).setNumerodealug(conta5++);
-                        arr_numalugxmes.get(0).setMes("Maio");
+                        naxma.setMes("Maio");
+                        conta5++;
+                        naxma.setNumerodealug(conta5);
+                        naxma.setNummes(5);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 6:
-                        arr_numalugxmes.get(0).setNumerodealug(conta6++);
-                        arr_numalugxmes.get(0).setMes("Junho");
+                        naxma.setMes("Junho");
+                        conta6++;
+                        naxma.setNumerodealug(conta6);
+                        naxma.setNummes(6);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 7:
-                        arr_numalugxmes.get(0).setNumerodealug(conta7++);
-                        arr_numalugxmes.get(0).setMes("Julio");
+                        naxma.setMes("Julio");
+                        conta7++;
+                        naxma.setNumerodealug(conta7);
+                        naxma.setNummes(7);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 8:
-                        arr_numalugxmes.get(0).setNumerodealug(conta8++);
-                        arr_numalugxmes.get(0).setMes("Agosto");
+                        naxma.setMes("Agosto");
+                        conta8++;
+                        naxma.setNumerodealug(conta8);
+                        naxma.setNummes(8);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 9:
-                        arr_numalugxmes.get(0).setNumerodealug(conta9++);
-                        arr_numalugxmes.get(0).setMes("Setembro");
+                        naxma.setMes("Setembro");
+                        conta9++;
+                        naxma.setNumerodealug(conta9);
+                        naxma.setNummes(9);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 10:
-                        arr_numalugxmes.get(0).setNumerodealug(conta10++);
-                        arr_numalugxmes.get(0).setMes("Outubro");
+                        naxma.setMes("Outubro");
+                        conta10++;
+                        naxma.setNumerodealug(conta10);
+                        naxma.setNummes(10);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 11:
-                        arr_numalugxmes.get(0).setNumerodealug(conta11++);
-                        arr_numalugxmes.get(0).setMes("Novembro");
+                        naxma.setMes("Novembro");
+                        conta11++;
+                        naxma.setNumerodealug(conta11);
+                        naxma.setNummes(11);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                     case 12:
-                        arr_numalugxmes.get(0).setNumerodealug(conta12++);
-                        arr_numalugxmes.get(0).setMes("Dezembro");
+                        naxma.setMes("Dezembro");
+                        conta12++;
+                        naxma.setNumerodealug(conta12);
+                        naxma.setNummes(12);
+                        arr_numalugxmes.add(naxma);
+                        j++;
                         break;
                 }
+                
+                //if(arr_numalugxmes.size() != j)
+                    str.append(arr_numalugxmes.get(j-1)).append("\n");
             }
         }
-        StringBuilder str = new StringBuilder("");
-        for (int i = 0; i < 10; i++) {
-            str.append(arr_numalugxmes.get(i)).append("\n");
-        }
-        return str.toString();
+//        StringBuilder str = new StringBuilder("");
+//        for (int i = 0; i < arr_numalugxmes.size(); i++) {
+//            str.append(arr_numalugxmes.get(i)).append("\n");
+//        }
+        if(j > 0){
+            return str.toString();
+        }else
+            return "Nao ha alugueres nese ano";
     }
     
     //FICHEIROS
