@@ -5,11 +5,13 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mateo
  */
-public class Opcao_aluguel_C {
+public class Opcao_aluguel_C implements Serializable{
     
     private String nome;
     private String descri;

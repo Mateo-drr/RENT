@@ -5,13 +5,14 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Mateo
  */
-public class TipoVeiculo_C {
+public class TipoVeiculo_C implements Serializable{
 
     private int numero;
     private String designacao;

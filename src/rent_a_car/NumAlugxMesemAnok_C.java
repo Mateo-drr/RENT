@@ -5,13 +5,14 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *
  * @author Mateo
  */
-public class NumAlugxMesemAnok_C {
+public class NumAlugxMesemAnok_C implements Serializable{
     private int numerodealug = 0;
     private String mes;
 

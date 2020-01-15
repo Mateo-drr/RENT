@@ -5,11 +5,13 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mateo
  */
-public class Funcionario_C extends Pessoa_C{
+public class Funcionario_C extends Pessoa_C implements Serializable{
 
     private String funcao;
     

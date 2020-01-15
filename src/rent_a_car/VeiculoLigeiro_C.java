@@ -5,11 +5,13 @@
  */
 package rent_a_car;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Mateo
  */
-public class VeiculoLigeiro_C extends Veiculo_C{
+public class VeiculoLigeiro_C extends Veiculo_C implements Serializable{
         private int capbaggagem;
         private int numportas;
 
