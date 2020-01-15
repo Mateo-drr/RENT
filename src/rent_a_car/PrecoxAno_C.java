@@ -53,7 +53,7 @@ public class PrecoxAno_C implements Serializable{
 
     @Override
     public String toString() {
-        return "Ano: " + ano + "Preco: " + preco;
+        return "\nAno: " + ano + "\nPreco: " + preco;
     }
     
     

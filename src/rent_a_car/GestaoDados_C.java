@@ -34,15 +34,26 @@ public class GestaoDados_C {
     ArrayList<NumAlugxMesemAnok_C> arr_numalugxmes = new ArrayList<>(); // Array do numero de alugueres por mes em um ano especifico
         
     //VEICULOS & TIPO DE VEICULOS
-/**
- * 
- * @param tv 
- */
+    
+    /**
+     * Recebe um tipo de veiculo, atribui um numero
+     * desde 1 com respecto á posiçao 0 do array,
+     * e depois é guardado cada tipo de 
+     * veiculo no array arr_tipov.
+     * @param tv Variable para designar o tipo de veiculo.
+     */
     public void NovoTipoVeiculo(TipoVeiculo_C tv) {
         tv.setNumero(arr_tipov.size() + 1);
         arr_tipov.add(tv);
     }
-
+    
+    /**
+     * Metodo para copiar cada toString de cada objeto
+     * do array arr_tipov, logo devolve o str
+     * e o imprime.
+     * @return 
+     */
+    
     public String ListarTodosTiposVeiculos() {
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_tipov.size(); i++) {
@@ -52,6 +63,14 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    /**
+     * Metodo que verifica que o numero de 
+     * tipo de veiculo nao se repita, porque compara
+     * cada posiçao do array arr_tipov e se é igual
+     * entao devolve o valor 0.
+     * @param numero
+     * @return 
+     */
     public int VerifNumerotipoveic(int numero) {
         for (int i = 0; i < arr_tipov.size(); i++) {
             if (arr_tipov.get(i).getNumero() == numero) {
@@ -75,24 +94,51 @@ public class GestaoDados_C {
         return -1;
     }
     */
+    
+    /**
+     * Metodo que permite devolver o tipo de veiculo a depender 
+     * da posiçao solicitada.
+     * @param pos valor que determina a posiçao do array arr_tipov
+     * @return 
+     */
     public TipoVeiculo_C ObterTipoVeicPorNum(int pos) {
         return arr_tipov.get(pos);
     }
     
+    /**
+     * Metodo que devolve a cantidad de 
+     * posiçoes utilizadas do array arr_tipov
+     * @return 
+     */
     public int getTotalTiposVeic() {
         return arr_tipov.size();
     }
     
+    /**
+     * Metodo que devolve a cantidad de posiçoes utilizadas
+     * do array arr_veic
+     * @return 
+     */
     public int getTotalVeic(){
         return arr_veic.size();
     }
-
+    
+    /**
+     * Recebe um veiculo, e é guardado em
+     * cada posiçao do arrar arr_veic.
+     * @param v variable que representa o veiculo
+     */
     public void NovoVeiculo(Veiculo_C v) {
         arr_veic.add(v);
         v.getTipo().NovoVeiculo(v);
 
     }
-
+    
+    /**
+     * 
+     * @param tipo
+     * @return 
+     */
     public String ObterVeiculosPorTipo(String tipo){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_tipov.size(); i++) {
@@ -105,6 +151,13 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    /**
+     * Metodo que recebe a matricula, e depois compara 
+     * com cada matricula já registrada no array arr_veic
+     * e se sao iguais, devolve um valor de 0
+     * @param matricula variable que tem o valor da matricula
+     * @return 
+     */
     public int VerifMatriculaUnica(int matricula){
         for (int i = 0; i < arr_veic.size(); i++) {
             if(arr_veic.get(i).getMatricula() == matricula){
