@@ -15,10 +15,12 @@ import java.util.Calendar;
 public class NumAlugxMesemAnok_C implements Serializable{
     private int numerodealug = 0;
     private String mes;
+    private int nummes;
 
-    public NumAlugxMesemAnok_C(int numerodealug, String mes) {
+    public NumAlugxMesemAnok_C(int numerodealug, String mes, int nummes) {
         this.numerodealug = numerodealug;
         this.mes = mes;
+        this.nummes = nummes;
     }
 
     /**
@@ -49,14 +51,23 @@ public class NumAlugxMesemAnok_C implements Serializable{
         this.mes = mes;
     }
 
+    /**
+     * @return the nummes
+     */
+    public int getNummes() {
+        return nummes;
+    }
+
+    /**
+     * @param nummes the nummes to set
+     */
+    public void setNummes(int nummes) {
+        this.nummes = nummes;
+    }
+
     @Override
     public String toString() {
         return mes + " - numero de alugueres: " + numerodealug;
     }
-
-    
    
-    
-    
-    
 }

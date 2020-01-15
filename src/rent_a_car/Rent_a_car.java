@@ -911,7 +911,8 @@ public class Rent_a_car {
             //Calendar dataesc = new GregorianCalendar();
             int ano = Consola.lerInt("Cual e o ano? ", 1900, 2112);
             //dataesc.set(ano, 0, 0);
-            System.out.println("Numero de alugueres registrados no ano "+ ano + gd.PrecototAlugxAno());
+            System.out.println("Numero de alugueres registrados no ano "+ ano); 
+            System.out.println(gd.NumAlugxMes(ano));
         }else
             System.out.println("Nao ha alugueres registrados!");
     }   
