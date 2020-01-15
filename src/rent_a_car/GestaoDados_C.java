@@ -449,7 +449,8 @@ public class GestaoDados_C {
     }
     
     /**
-     * Metodo utilizado para obter um condutor do arr_cond utilizando a posicao no array
+     * Metodo utilizado para obter um condutor do arr_cond
+     * utilizando a posicao no array
      * @param pos inteiro da posicao do condutor no array
      * @return Condutor_C, o objeto na posicao especificada
      */
@@ -460,7 +461,8 @@ public class GestaoDados_C {
     //OPCAO ALUGUEL
     
     /**
-     * Metodo que salva a opcao aluguel criada em Rent_a_car dentro do arr_opalug
+     * Metodo que salva a opcao aluguel criada
+     * em Rent_a_car dentro do arr_opalug
      * @param opalug objeto da classe Opcao_aluguel_C
      */
     public void NovaOpcaoAlug(Opcao_aluguel_C opalug){
@@ -489,7 +491,8 @@ public class GestaoDados_C {
     }
     
     /**
-     * Metodo utilizado para encontrar uma Opcao_aluguel_C utilizando a posicao do arr_opalug
+     * Metodo utilizado para encontrar uma Opcao_aluguel_C
+     * utilizando a posicao do arr_opalug
      * @param pos int da posicao no arr_opalug
      * @return Opcao_aluguel_C, e a opcao de aluguel na posicao especificada
      */
@@ -500,7 +503,8 @@ public class GestaoDados_C {
     //ALUGERES
     
     /**
-     * Metodo que salva o aluguer criado em Rent_a_car dentro do arr_alug
+     * Metodo que salva o aluguer criado
+     * em Rent_a_car dentro do arr_alug
      * @param al objeto da classe Aluguer_C
      */
     public void NovoAluguer(Aluguer_C al){
@@ -511,7 +515,8 @@ public class GestaoDados_C {
     /**
      * Metodo que lista todos os alugueres de um tipo espsecifico (1,2,3,4)
      * @param tipoal inteiro que especifica o tipo de aluguer
-     * @return String do toString da clase Aluguer_C, so dos alugueres do tipo especificado
+     * @return String do toString da clase Aluguer_C,
+     * so dos alugueres do tipo especificado
      */
     public String ListarAlugxEstado(int tipoal){
         StringBuilder str = new StringBuilder("");
@@ -573,7 +578,8 @@ public class GestaoDados_C {
     //ESTATISTICAS
     
     /**
-     * Metodo que calcula o percentagem de alugueres cancelados. Pescquisa o tipo 3(cancelados) do arr_alug.
+     * Metodo que calcula o percentagem de alugueres cancelados. 
+     * Pescquisa o tipo 3(cancelados) do arr_alug.
      * @return j, o percentagem de alugueres cancelados
      */
     public float NumAlugCancel(){
@@ -589,7 +595,8 @@ public class GestaoDados_C {
     }
     
     /**
-     * Metodo que calcula o preco de todos os alugueres por ano. Compara cada um das datas do arr_alug e soma o preco de cada aluguel do mesmo ano
+     * Metodo que calcula o preco de todos os alugueres por ano. 
+     * Compara cada um das datas do arr_alug e soma o preco de cada aluguel do mesmo ano
      * @return String com a informacao do toString da clase PrecoxAno_C
      */
     public String PrecototAlugxAno(){
