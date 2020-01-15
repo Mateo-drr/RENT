@@ -448,21 +448,38 @@ public class GestaoDados_C {
     
     }
     
+    /**
+     * Metodo utilizado para obter um condutor do arr_cond utilizando a posicao no array
+     * @param pos inteiro da posicao do condutor no array
+     * @return Condutor_C, o objeto na posicao especificada
+     */
     public Condutor_C Obtercondxposarr(int pos){
         return arr_cond.get(pos);
     }
     
     //OPCAO ALUGUEL
     
+    /**
+     * Metodo que salva a opcao aluguel criada em Rent_a_car dentro do arr_opalug
+     * @param opalug objeto da classe Opcao_aluguel_C
+     */
     public void NovaOpcaoAlug(Opcao_aluguel_C opalug){
         opalug.setNum(arr_opalug.size()+1);
         arr_opalug.add(opalug);
     }
     
+    /**
+     * Metodo utilizado para saber o tamanho do arr_opalug
+     * @return int do tamano do arr_opalug
+     */
     public int getTotalOpAl(){
         return arr_opalug.size();
     }
     
+    /**
+     * Metodo que lista todas as opcoes de aluguer
+     * @return String do toString da classe Opcao_aluguel_C
+     */
     public String ListarTodasOpAl(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_opalug.size(); i++) {
@@ -471,17 +488,31 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    /**
+     * Metodo utilizado para encontrar uma Opcao_aluguel_C utilizando a posicao do arr_opalug
+     * @param pos int da posicao no arr_opalug
+     * @return Opcao_aluguel_C, e a opcao de aluguel na posicao especificada
+     */
     public Opcao_aluguel_C ObterOpAl(int pos){
         return arr_opalug.get(pos);
     }
     
     //ALUGERES
     
+    /**
+     * Metodo que salva o aluguer criado em Rent_a_car dentro do arr_alug
+     * @param al objeto da classe Aluguer_C
+     */
     public void NovoAluguer(Aluguer_C al){
         al.setNumero(arr_alug.size()+1);
         arr_alug.add(al);
     }
     
+    /**
+     * Metodo que lista todos os alugueres de um tipo espsecifico (1,2,3,4)
+     * @param tipoal inteiro que especifica o tipo de aluguer
+     * @return String do toString da clase Aluguer_C, so dos alugueres do tipo especificado
+     */
     public String ListarAlugxEstado(int tipoal){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
@@ -491,6 +522,11 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    /**
+     * Metodo que lista todos os alugueres de um condutor especifico
+     * @param cond objeto Condutor_C usado para comparar com o objeto Condutor_C do arr_alug
+     * @return String do toString da classe arr_alug so dos alugueres do condutor especificado
+     */
     public String ListarAlugxCond(Condutor_C cond){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
@@ -500,19 +536,32 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    /**
+     * Metodo que classifica os alugueres com tipo 1 (reservado)
+     * @return String do toString da classe Aluguer_C 
+     */
     public String ListarAlugReserv(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
             if(arr_alug.get(i).getTipoaluger() == 1)
-            str.append(arr_alug.get(i)).append("\n");
+                str.append(arr_alug.get(i)).append("\n");
         }
         return str.toString();
     }
     
+    /**
+     * Metodo utilizado para obter o tamanho do arr_alug
+     * @return int o tamano do array
+     */
     public int getTotalAl(){
         return arr_alug.size();
     }
     
+    /**
+     * Metodo utilizado para obter um aluguer por seu numero
+     * @param num numero de aluguer
+     * @return Aluguer_C 
+     */
     public Aluguer_C ObterAlugxNum(int num){
         return arr_alug.get(num-1);
     }
@@ -523,6 +572,10 @@ public class GestaoDados_C {
     
     //ESTATISTICAS
     
+    /**
+     * Metodo que calcula o percentagem de alugueres cancelados. Pescquisa o tipo 3(cancelados) do arr_alug.
+     * @return j, o percentagem de alugueres cancelados
+     */
     public float NumAlugCancel(){
         float j = 0;
         for (int i = 0; i < arr_alug.size(); i++) {
@@ -535,6 +588,10 @@ public class GestaoDados_C {
         return j;
     }
     
+    /**
+     * Metodo que calcula o preco de todos os alugueres por ano. Compara cada um das datas do arr_alug e soma o preco de cada aluguel do mesmo ano
+     * @return String com a informacao do toString da clase PrecoxAno_C
+     */
     public String PrecototAlugxAno(){
         Calendar dataIni;
         Calendar dataFim;
@@ -549,11 +606,6 @@ public class GestaoDados_C {
             anoi = arr_alug.get(j).getDiaentregaHora().get(Calendar.YEAR);
             for (i = 0; i < arr_alug.size(); i++) {
                 anof = arr_alug.get(i).getDiaentregaHora().get(Calendar.YEAR);
-                //verifica se ja foi obtido o preco total de uma data
-//                if(i > j && (anoi == anof)){
-//                    break;
-//                }
-                
                 //Encontra outros alugueres com a mesma data e soma o preco
                 if(anoi - anof == 0){
                     prectot += arr_alug.get(i).getPreco();
@@ -570,6 +622,12 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    
+    /**
+     * Metodo que pesquisa no array de alugueres os alugueres que aconteceram em aquele ano e conta quantos alugueres ha por mes
+     * @param ano ano escolhido pelo usuario
+     * @return String com o toString da clase NumAlugxMesemAnok_C, dos alugueres que foram encontrados 
+     */
     public String NumAlugxMes(int ano){
         int conta1 = 0, j = 0;
         int conta2 = 0,conta3 = 0,conta4 = 0,conta5 = 0,conta6 = 0,conta7 = 0,conta8 = 0,conta9 = 0,conta10 = 0,conta11 = 0,conta12 = 0;
@@ -679,15 +737,9 @@ public class GestaoDados_C {
                         j++;
                         break;
                 }
-                
-                //if(arr_numalugxmes.size() != j)
                     str.append(arr_numalugxmes.get(j-1)).append("\n");
             }
         }
-//        StringBuilder str = new StringBuilder("");
-//        for (int i = 0; i < arr_numalugxmes.size(); i++) {
-//            str.append(arr_numalugxmes.get(i)).append("\n");
-//        }
         if(j > 0){
             return str.toString();
         }else
@@ -696,6 +748,10 @@ public class GestaoDados_C {
     
     //FICHEIROS
     
+    /**
+     * Metodo que permite salvar os dados dos arrays no ficheiro dados.txt
+     * 
+     */
     public void SalvarDadosTxt() {  
         try
         {
@@ -714,11 +770,12 @@ public class GestaoDados_C {
         {
             ioe.printStackTrace();
         }
-        
-        
-        
     }
     
+    /**
+     * Metodo que permite carregar os dados salvados no ficheiro dados.txt
+     * 
+     */
     public void LerdadosTxt(){
         try
         {
@@ -741,7 +798,7 @@ public class GestaoDados_C {
         } 
         catch (ClassNotFoundException c) 
         {
-            System.out.println("Class not found");
+            System.out.println("Clase nao encontrada");
             c.printStackTrace();
             return;
         }
