@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rent_a_car;
 
 import java.text.ParseException;
@@ -13,15 +8,32 @@ import java.util.GregorianCalendar;
 import util.Consola;
 
 /**
- * Main
- * @author Mateo
+ * Classe que representa o menu,tambem têm controlo das verficações e dos erros.
+ * 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
-public class Rent_a_car {
 
+
+public class Rent_a_car {
+    
+    /**
+     * Formatos para as datas.
+     */
     public static SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+    /**
+     * Formato para as datas e horas.
+     */
     public static SimpleDateFormat formatoH = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    /**
+     * Instância da classe gestao de daddos na main..
+     */
     public static GestaoDados_C gd = new GestaoDados_C();
     
+    /**
+     * É o menu principal
+     * @param args 
+     */
     public static void main(String[] args) {
         
         int op;     //opcao a escolher do menu principal
@@ -54,6 +66,10 @@ public class Rent_a_car {
         } while (op != 0);
     }
 
+    /**
+     * Imprime na ecra o menu principal.
+     * @return opcao escolhe o numero de opção.
+     */
     public static int menu() {
         System.out.println("1.Veiculos");
         System.out.println("2.Funcionarios");
@@ -67,6 +83,10 @@ public class Rent_a_car {
         
     //SOUT SUBMENUS
     
+    /**
+     * Imprime o submenu da opção numero 1.
+     * @return opcao escolhe o numero de opção.
+     */
     public static int menuVeiculos(){
         System.out.println("1. Adicionar um tipo de Veiculo");
         System.out.println("2. Consultar todos os tipos de Veiculos");
@@ -77,6 +97,10 @@ public class Rent_a_car {
         return opcao;
     }
     
+    /**
+     * Imprime o submenu da opção numero 2.
+     * @return escolhe o numero de opção.
+     */
     public static int menuFuncionarios(){
         System.out.println("1. Adicionar Funcionario");
         System.out.println("2. Consultar Funcionarios");
@@ -84,7 +108,10 @@ public class Rent_a_car {
         int opcao = Consola.lerInt("Qual a opcao: ", 0, 2);
         return opcao;
     }
-    
+    /**
+     * Imprime o submenu da opção numero 3.
+     * @return escolhe o numero de opção.
+     */
     public static int menuCondutores(){
         System.out.println("1. Adicionar Condutor");
         System.out.println("2. Consultar Condutor por NIF");
@@ -93,6 +120,10 @@ public class Rent_a_car {
         return opcao;
     }
     
+    /**
+     * Imprime o submenu da opção numero 4.
+     * @return escolhe o numero de opção.
+     */
     public static int menuAlugueres(){
         System.out.println("1. Adicionar opcao de aluguer");
         System.out.println("2. Consultar opcoes de aluguer");
@@ -110,6 +141,10 @@ public class Rent_a_car {
         return opcao;
     }
     
+    /**
+     * Imprime o submenu da opção numero 5.
+     * @return escolhe o numero de opção.
+     */
     public static int menuEStatisticas(){
         System.out.println("1. Percentagem de reservas canceladas");
         System.out.println("2. Total de veiculos alugados no momento");
@@ -122,6 +157,11 @@ public class Rent_a_car {
     
     //SUBMENUS
     
+    /**
+     * Menu da primeira opção do menu principal,
+     * menu dos veiculos.
+     * @param opsub valor que determina qual case utilizar.
+     */
     public static void menuCase1(int opsub){
         
         do{
@@ -147,6 +187,11 @@ public class Rent_a_car {
                     }while(opsub != 0);
     }
     
+    /**
+     * Menu da segunda opção do menu principal,
+     * menu dos funcionarios.
+     * @param opsub valor que determina qual case utilizar.
+     */
     public static void menuCase2(int opsub){
         
         do{
@@ -166,6 +211,11 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Menu da terceira opção do menu principal,
+     * menu dos condutores.
+     * @param opsub valor que determina qual case utilizar.
+     */
     public static void menuCase3(int opsub){
         
         do{
@@ -184,6 +234,11 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Menu da quarta opção do menu principal,
+     * menu dos alugeres.
+     * @param opsub valor que determina qual case utilizar.
+     */
     public static void menuCase4(int opsub){
         
         do{
@@ -239,6 +294,11 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Menu da quinta opção do menu principal,
+     * menu das estatísticas.
+     * @param opsub valor que determina qual case utilizar.
+     */
     public static void menuCase5(int opsub){
         
         do{
@@ -265,9 +325,21 @@ public class Rent_a_car {
     
     //VEICULOS
     
+    /**
+     * Permite registrar um novo tipo de veiculo
+     */
     public static void InserirTipoVeic(){
         
-        String designacao = Consola.lerString("Insira a designacao do tipo de veiculo: ");
+        int i=0;
+        int y;
+        String designacao;
+       // do{
+            designacao = Consola.lerString("Insira a designacao do tipo de veiculo: ");
+         //   y = gd.VerifDesignaçaoTipoveic(i);
+         //   if(y ==0)
+         //          System.out.println("Designaçao ja registrada!");
+        //}while(y == 0);
+        
         String descricao = Consola.lerString("Insira a descricao do tipo de veiculo: ");
         double preco = Consola.lerDouble("Insira o precio deste tipo de veiculo: ", 0, 10000);
         
@@ -276,6 +348,9 @@ public class Rent_a_car {
         gd.NovoTipoVeiculo(tv);
     }
     
+    /**
+     * Mostrar uma lista de todos os tipos de veiculos.
+     */
     public static void ListartodosTiposdeVeic(){
         if(gd.getTotalTiposVeic() != 0)
         System.out.println(gd.ListarTodosTiposVeiculos());
@@ -283,6 +358,9 @@ public class Rent_a_car {
             System.out.println("Nao a tipos de veiculos inseridos!\n");
     }
     
+    /**
+     * Permite registrar um novo veiculo.
+     */
     public static void InserirVeic(){
         int i;
         int numtipov;
@@ -336,6 +414,11 @@ public class Rent_a_car {
     }
     
     //falta verificacao
+    
+    /**
+     * Imprime na ecra a lista de veiculos divididos
+     * por seu respectivo tivo de veiculo.
+     */
     public static void ListarVeicxTipo(){
         if(gd.getTotalTiposVeic() != 0){
                 String tipo = Consola.lerString("Cual e o tipo de veiculo?: ");
@@ -345,9 +428,12 @@ public class Rent_a_car {
     }
     
     //FUNCIONARIOS
-    
+    /**
+     * Registra um novo funcionario.
+     */
     public static void InserirFunc(){
         
+        int y;
         int i;
         int NIF;
         int telefone; 
@@ -355,9 +441,10 @@ public class Rent_a_car {
         do{
                NIF = Consola.lerInt("Insira o NIF do funcionario: ", 0, 999999999);
                i = gd.VerifNIFFunc(NIF);
-               if(i == 0)
+               y = gd.VerifNIFFunc_Cond(NIF);
+               if(i == 0 || y == 0)
                    System.out.println("Numero de NIF ja existe!");
-           }while(i == 0);
+           }while(i == 0 || y == 0);
         
         String nome = Consola.lerString("Insira o nome do funcionario: ");
         String morada = Consola.lerString("Insira a morada: ");
@@ -367,10 +454,12 @@ public class Rent_a_car {
          do{
                telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
                i = gd.VerifTelefoneFunc(telefone);
-               if(i == 0)
+               y = gd.VerifTelefoneFunc_Cond(telefone);
+               if(i == 0 || y ==0)
                    System.out.println("Numero de telefone ja registrado!");
-           }while(i == 0);
-        String funcao = Consola.lerString("Qual e a funcao: ");
+           }while(i == 0 || y == 0);
+        
+         String funcao = Consola.lerString("Qual e a funcao: ");
         
         Funcionario_C f = new Funcionario_C(NIF, nome, morada, telefone, funcao);
         
@@ -378,6 +467,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite imprimir uma lista dos
+     * funcionarios já registrados.
+     */
     public static void ListarFunc(){
         if(gd.getTotalFunc() != 0)
             System.out.println(gd.ListarTodosFunc());
@@ -388,9 +481,14 @@ public class Rent_a_car {
     //CONDUTORES
     
     //falta mostrar alugueres de ese condutor
+    
+    /**
+     * Permite registrar um novo condutor
+     */
     public static void InserirCondutor(){
         
         int i;
+        int y;
         int x;
         String datax;
         Calendar data = new GregorianCalendar();
@@ -402,9 +500,10 @@ public class Rent_a_car {
         do{
                NIF = Consola.lerInt("Insira o NIF do condutor: ", 0, 999999999);
                i = gd.VerifNIFCond(NIF);
-               if(i == 0)
+              y = gd.VerifNIFCond_Func(NIF);
+               if(i == 0 || y == 0)
                    System.out.println("Numero de NIF ja existe!");
-           }while(i == 0);
+           }while(i == 0 || y == 0);
         
         String nome = Consola.lerString("Insira o nome do condutor: ");
         String morada = Consola.lerString("Insira a morada: ");
@@ -414,9 +513,10 @@ public class Rent_a_car {
          do{
                telefone = Consola.lerInt("Insira o telefone: ", 0, 999999999);
                i = gd.VerifTelefoneCond(telefone);
-               if(i == 0)
+               y = gd.VerifTelefoneCond_Func(telefone);
+               if(i == 0 || y == 0)
                    System.out.println("Numero de telefone ja registrado!");
-           }while(i == 0);
+           }while(i == 0 || y == 0);
          
        
         //verificaçao numero da carta de conduçao
@@ -446,6 +546,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite pesquisar a um condutor
+     * a travez de seu NIF
+     */
     public static void ObterCondutorxNIF(){
         if(gd.getTotalCond()!= 0){
                 int findNIF = Consola.lerInt("Cual e o NIF: ", 0, 999999999);
@@ -461,6 +565,9 @@ public class Rent_a_car {
     
     //Opcao Alugueres
     
+    /**
+     * Inserir uma nova opção de aluger
+     */
     public static void InserirOpcaoAlug(){
         
         String nome = Consola.lerString("Nome da opcao: ");
@@ -473,6 +580,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite imprimir uma lista de todas
+     * as opções de alugeres.
+     */
     public static void ListarTodasOpcoesAlug(){
         if(gd.getTotalOpAl() != 0)
             System.out.println(gd.ListarTodasOpAl());
@@ -482,6 +593,9 @@ public class Rent_a_car {
     
     //Alugueres
     
+    /**
+     * Permite registrar um novo aluger.
+     */
     public static void RegistrarAlug(){
         
         if(gd.getTotalCond() != 0){
@@ -584,6 +698,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite imprimir uma lista de alugeres
+     * de acordo ao seu respectivo estado.
+     */
     public static void ListarAlugxEstado(){
         int tipoal;
         
@@ -596,6 +714,10 @@ public class Rent_a_car {
         System.out.println(gd.ListarAlugxEstado(tipoal));
     }
     
+    /**
+     * Permite alterar o dia e a hora
+     * do levantamento do veiculo.
+     */
     public static void AlterarDeHL(){
         
         int y;
@@ -625,6 +747,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite alterar o dia e hora 
+     * a entrega do veiculo.
+     */
     public static void AlterarDeHE(){
         int y;
         String datay;
@@ -652,6 +778,10 @@ public class Rent_a_car {
         al.setDiaentregaHora(DeHE);
     }
     
+    /**
+     * Permite alterar o local
+     * de levantamento do veiculo.
+     */
     public static void AlterarLocLev(){
         
         if(gd.getTotalAl() != 0)
@@ -666,6 +796,10 @@ public class Rent_a_car {
         
     }
     
+    /**
+     * Permite alterar o local de 
+     * entrega do veiculo.
+     */
     public static void AlterarLocEnt(){
         
         if(gd.getTotalAl() != 0)
@@ -680,6 +814,7 @@ public class Rent_a_car {
         
     }
     
+//    Borra el aluger de la base de datos.    
 //    public static void CancelarAl(){
 //        if(gd.getTotalAl() != 0){
 //            System.out.println(gd.ListarAlugReserv());
@@ -689,6 +824,10 @@ public class Rent_a_car {
 //            System.out.println("Nao a tipos de veiculos inseridos!\n");        
 //    }
     
+    /**
+     * Permite pôr o aluger no
+     * estado cancelado.
+     */
     public static void CancelarAl(){
         if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
@@ -699,6 +838,10 @@ public class Rent_a_car {
             System.out.println("Nao a tipos de veiculos inseridos!\n");        
     }
     
+    /**
+     * Permite levantar o veiculo que
+     * já começo o aluger.
+     */
     public static void LevantarVeic(){
         if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
@@ -709,6 +852,9 @@ public class Rent_a_car {
             System.out.println("Nao a alugueres registrados!\n");        
     }
     
+    /**
+     * Registra a entrega do veiculo.
+     */
     public static void EntregarVeic(){
         //agregar quilometragem
         if(gd.getTotalAl() != 0){
@@ -722,6 +868,10 @@ public class Rent_a_car {
     
     //Estatisticas
     
+    /**
+     * Imprime uma percetagem dos alugeres
+     * que estejam no estado cancelado.
+     */
     public static void PercentagemCancel(){
         if(gd.getTotalAl() != 0){
             System.out.println("Percentagem de alugures cancelados: " + gd.NumAlugCancel() + "%");
@@ -729,6 +879,9 @@ public class Rent_a_car {
             System.out.println("Nao ha alugureres registrados");
     }
     
+    /**
+     * Imprime o numero total de veiculos alugados.
+     */
     public static void TotalVeicAlug(){
         if(gd.getTotalAl() != 0){
             float i = gd.getTotalAl() - (gd.NumAlugCancel()*gd.getTotalAl()/100);

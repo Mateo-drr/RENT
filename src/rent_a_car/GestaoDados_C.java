@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.awt.AWTEventMulticaster;
@@ -48,7 +44,21 @@ public class GestaoDados_C {
         }
         return -1;
     }
-    
+    /*public int VerifDesignaçaoTipoveic(int i){
+        for (int j = 0; j < arr_tipov.size(); j++) {
+            for (i = 0; i < arr_tipov.size(); i++){
+                if(0 == arr_tipov.get(i).getDesignacao().compareTo(arr_tipov.get(i+1).getDesignacao()){
+                
+                }
+                //int x = arr_tipov.get(i).getDesignacao().compareTo(arr_tipov.get(i+1).getDesignacao());
+                if(x== 0){
+                    return 0;
+                }
+        }
+        }
+        return -1;
+    }
+    */
     public TipoVeiculo_C ObterTipoVeicPorNum(int pos) {
         return arr_tipov.get(pos);
     }
@@ -122,9 +132,26 @@ public class GestaoDados_C {
         }
         return -1;
     }
-        public int VerifTelefoneFunc(int telefone){
+    public int VerifNIFFunc_Cond(int NIF){
+           for (int i = 0; i < arr_cond.size(); i++){
+               if(arr_cond.get(i).getNIF() == NIF){
+                   return 0;
+               }
+           }
+           return -1;
+       }
+    
+    public int VerifTelefoneFunc(int telefone){
         for (int i = 0; i < arr_func.size(); i++) {
             if(arr_func.get(i).getTelefone() == telefone){
+                return 0;
+            }
+        }
+        return -1;
+    }
+     public int VerifTelefoneFunc_Cond(int telefone){
+        for (int i = 0; i < arr_cond.size(); i++) {
+            if(arr_cond.get(i).getTelefone() == telefone){
                 return 0;
             }
         }
@@ -182,6 +209,15 @@ public class GestaoDados_C {
         }
         return -1;
     }
+       public int VerifNIFCond_Func(int NIF){
+           for (int i = 0; i < arr_func.size(); i++){
+               if(arr_func.get(i).getNIF() == NIF){
+                   return 0;
+               }
+           }
+           return -1;
+       }
+       
      public int VerifTelefoneCond(int telefone){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getTelefone() == telefone){
@@ -190,6 +226,16 @@ public class GestaoDados_C {
         }
         return -1;
     }
+     
+     public int VerifTelefoneCond_Func(int telefone){
+        for (int i = 0; i < arr_func.size(); i++) {
+            if(arr_func.get(i).getTelefone() == telefone){
+                return 0;
+            }
+        }
+        return -1;
+    }
+     
      public int VerifCartaCond(int cartacond){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getNumcartacond() == cartacond){
