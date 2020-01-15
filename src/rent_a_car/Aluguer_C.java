@@ -41,19 +41,23 @@ public class Aluguer_C implements Serializable{
         this.preco = preco;
     }
 
-    
+    /**
+     * Metodo que salva as opcoes de aluguer escolhidas ao fazer um aluguer
+     * E chamada na main
+     * @param opalug objeto da classe Opcao_aluguel_C
+     */
     public void NovaOpcaoAlug(Opcao_aluguel_C opalug){
         arr_opalug.add(opalug);
     }
     
-    
-    public String ListarTodasOpAl(){
-        StringBuilder str = new StringBuilder("");
-        for (int i = 0; i < arr_opalug.size(); i++) {
-            str.append(arr_opalug.get(i)).append("\n");
-        }
-        return str.toString();
-    }
+//    
+//    public String ListarTodasOpAl(){
+//        StringBuilder str = new StringBuilder("");
+//        for (int i = 0; i < arr_opalug.size(); i++) {
+//            str.append(arr_opalug.get(i)).append("\n");
+//        }
+//        return str.toString();
+//    }
 
     /**
      * @return the tipoaluger
