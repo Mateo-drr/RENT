@@ -376,8 +376,8 @@ public class GestaoDados_C {
             }
             //So se foram encontrados alugueres com datas iguais
             if(x == 1){
-                arr_precxano.get(j).setAno(anoi);
-                arr_precxano.get(j).setPreco(prectot);
+                PrecoxAno_C preca = new PrecoxAno_C(prectot, anof);
+                arr_precxano.add(preca);
                 str.append(arr_precxano.get(j)).append("\n");
             }
         }    
