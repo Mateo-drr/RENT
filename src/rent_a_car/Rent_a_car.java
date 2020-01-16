@@ -758,32 +758,29 @@ public class Rent_a_car {
         String datay;
         Calendar DeHL = new GregorianCalendar();
         
-        if(gd.getTotalAl() != 0)
+        if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
-        else
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de levantamento: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            do{
+                do {
+                    y = 0;
+                    try {
+                        datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
+                        DeHL.setTime(formatoH.parse(datay));
+                    } catch (ParseException e) {
+                        y = 1;
+                        System.err.println("Data e hora com formato inválido!");
+                    }
+                } while (y == 1);
+                i = gd.VerifDatas(al.getDiaentregaHora(), DeHL);
+                if(i == -1)
+                    System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
+            }while(i == -1);
+            al.setDialevantHora(DeHL);
+            gd.AltDeHL(al);
+        }else
             System.out.println("Nao a tipos de veiculos inseridos!\n");
-        
-        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de levantamento: ", 1, gd.getTotalAl());
-        Aluguer_C al = gd.ObterAlugxNum(numero);
-        
-        do{
-            do {
-                y = 0;
-                try {
-                    datay = Consola.lerString("Data e hora de levantamento (dd-mm-yyyy HH:mm): ");
-                    DeHL.setTime(formatoH.parse(datay));
-                } catch (ParseException e) {
-                    y = 1;
-                    System.err.println("Data e hora com formato inválido!");
-                }
-            } while (y == 1);
-            i = gd.VerifDatas(al.getDiaentregaHora(), DeHL);
-            if(i == -1)
-                System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
-        }while(i == -1);
-        
-        al.setDialevantHora(DeHL);
-        
     }
     
     /**
@@ -795,32 +792,29 @@ public class Rent_a_car {
         int y;
         String datay;
         Calendar DeHE = new GregorianCalendar();
-        
-        if(gd.getTotalAl() != 0)
+        if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
-        else
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de entrega: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            do{
+                do {
+                    y = 0;
+                    try {
+                        datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
+                        DeHE.setTime(formatoH.parse(datay));
+                    } catch (ParseException e) {
+                        y = 1;
+                        System.err.println("Data e hora com formato inválido!");
+                    }
+                } while (y == 1);
+                i = gd.VerifDatas(DeHE, al.getDialevantHora());
+                if(i == -1)
+                    System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
+            }while(i == -1);
+            al.setDiaentregaHora(DeHE);
+            gd.AltDeHE(al);
+        }else
             System.out.println("Nao a tipos de veiculos inseridos!\n");
-        
-        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de entrega: ", 1, gd.getTotalAl());
-        Aluguer_C al = gd.ObterAlugxNum(numero);
-        
-        do{
-            do {
-                y = 0;
-                try {
-                    datay = Consola.lerString("Data e hora de entrega (dd-mm-yyyy HH:mm): ");
-                    DeHE.setTime(formatoH.parse(datay));
-                } catch (ParseException e) {
-                    y = 1;
-                    System.err.println("Data e hora com formato inválido!");
-                }
-            } while (y == 1);
-            i = gd.VerifDatas(DeHE, al.getDialevantHora());
-            if(i == -1)
-                System.out.println("Data de entrega tem que ter uma diferenca minima com a data de levantamento de 1 dia");
-        }while(i == -1);
-        
-        al.setDiaentregaHora(DeHE);
     }
     
     /**
@@ -829,15 +823,14 @@ public class Rent_a_car {
      */
     public static void AlterarLocLev(){
         
-        if(gd.getTotalAl() != 0)
+        if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
-        else
-            System.out.println("Nao a tipos de veiculos inseridos!\n");
-        
-        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de levantamento: ", 1, gd.getTotalAl());
-        Aluguer_C al = gd.ObterAlugxNum(numero);
-        
-        al.setLocallevant(Consola.lerString("Local de levantamento novo: "));
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de levantamento: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            al.setLocallevant(Consola.lerString("Local de levantamento novo: "));
+            gd.AltLocL(al);
+        }else
+            System.out.println("Nao a alugueres registrados!\n");
         
     }
     
@@ -847,16 +840,14 @@ public class Rent_a_car {
      */
     public static void AlterarLocEnt(){
         
-        if(gd.getTotalAl() != 0)
+        if(gd.getTotalAl() != 0){
             System.out.println(gd.ListarAlugReserv());
-        else
-            System.out.println("Nao a tipos de veiculos inseridos!\n");
-        
-        int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de entrega: ", 1, gd.getTotalAl());
-        Aluguer_C al = gd.ObterAlugxNum(numero);
-        
-        al.setLocalentrega(Consola.lerString("Local de entrega novo: "));
-        
+            int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de entrega: ", 1, gd.getTotalAl());
+            Aluguer_C al = gd.ObterAlugxNum(numero);
+            al.setLocalentrega(Consola.lerString("Local de entrega novo: "));
+            gd.AltLocE(al);
+        }else
+            System.out.println("Nao a alugueres registrados!\n");
     }
     
 //    Borra el aluger de la base de datos.    
@@ -879,8 +870,9 @@ public class Rent_a_car {
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja cancelar: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setTipoaluger(3);
+            gd.AltTipo(al);
         }else
-            System.out.println("Nao a tipos de veiculos inseridos!\n");        
+            System.out.println("Nao a alugueres registrados!\n");        
     }
     
     /**
@@ -888,11 +880,33 @@ public class Rent_a_car {
      * já começo o aluger.
      */
     public static void LevantarVeic(){
+        int i = 0;
+        int j = 0;
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
-            int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
-            Aluguer_C al = gd.ObterAlugxNum(numero);
-            al.setTipoaluger(2);
+            int k = gd.ObterNumFuncAgentes();
+            if(k != 0){
+                do{
+                    System.out.println(gd.ListarTodosFunc());
+                    int NIF = Consola.lerInt("Cual e o NIF do funcionario a realizar o servico? ", 0, 999999999);
+                    i = gd.ObterFuncxNIF(NIF);
+                    if(i == -1){
+                        System.out.println("NIF escolhido nao registrado!");
+                    }else{
+                        j = gd.VerifFuncAgente(i);
+                        if(j == -1)
+                            System.out.println("So os funcionarios agentes podem realizar o servico.");
+                    }
+                }while(i == -1 || j == -1);
+                System.out.println(gd.ListarAlugReserv());
+                int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
+                Aluguer_C al = gd.ObterAlugxNum(numero);
+                al.setTipoaluger(2);
+                gd.AltTipo(al);
+                String condic = Consola.lerString("Condicao atual do veiculo: ");
+                
+                
+            }else
+                System.out.println("Nao a funcionarios agentes registrados para realizar o servico");
         }else
             System.out.println("Nao a alugueres registrados!\n");        
     }
@@ -901,12 +915,31 @@ public class Rent_a_car {
      * Registra a entrega do veiculo.
      */
     public static void EntregarVeic(){
+        int i = 0;
+        int j = 0;
         //agregar quilometragem
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugxEstado(2)); // revisar si tienes esta funcion con la de alugueres reserv. duplicada, osea si hace lo mismo
-            int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
-            Aluguer_C al = gd.ObterAlugxNum(numero);
-            al.setTipoaluger(2);
+            int k = gd.ObterNumFuncAgentes();
+            if(k != 0){
+                do{
+                    System.out.println(gd.ListarTodosFunc());
+                    int NIF = Consola.lerInt("Cual e o NIF do funcionario a realizar o servico? ", 0, 999999999);
+                    i = gd.ObterFuncxNIF(NIF);
+                    if(i == -1){
+                        System.out.println("NIF escolhido nao registrado!");
+                    }else{
+                        j = gd.VerifFuncAgente(i);
+                        if(j == -1)
+                            System.out.println("So os funcionarios agentes podem realizar o servico.");
+                    }
+                }while(i == -1 || j == -1);
+                System.out.println(gd.ListarAlugxEstado(2)); // revisar si tienes esta funcion con la de alugueres reserv. duplicada, osea si hace lo mismo
+                int numero = Consola.lerInt("Escolha o numero do alguer que deseja entregar: ", 1, gd.getTotalAl());
+                Aluguer_C al = gd.ObterAlugxNum(numero);
+                al.setTipoaluger(4);
+                gd.AltTipo(al);
+            }else
+                System.out.println("Nao a funcionarios agentes registrados para realizar o servico");
         }else
             System.out.println("Nao a alugueres registrados!\n");      
     }
