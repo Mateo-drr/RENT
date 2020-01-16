@@ -1,6 +1,7 @@
 
 package rent_a_car;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Calendar;
  * @author Mateo Rodriguez
  * @author Juan Marcillo
  */
-public class Servico_C {
+public class Servico_C implements Serializable{
     private int numero;
     private Aluguer_C alug;
     private Calendar DeH;
