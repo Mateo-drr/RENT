@@ -334,9 +334,12 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @param NIF_func
-     * @return 
+     * Metodo que recebe um int NIF_func,e 
+     * compara com os valores NIF de cada funcionario,
+     * se sao iguais, devolve o valor da posiçao
+     * onde a comparaçao foi igual.
+     * @param NIF_func variable com valor que vai ser comparada
+     * @return valor real
      */
     public int ObterFuncxNIF(int NIF_func){
         for (int i = 0; i < arr_func.size(); i++) {
@@ -347,6 +350,13 @@ public class GestaoDados_C {
         return -1;
     }
     
+    /**
+     * Metodo que compara o string funçao de cada funcionario
+     * com "agente", se é igual devolve um valor de 0.
+     * @param pos variable com a posiçao onde vai
+     * pesquisar qual funcionario vai comparar.
+     * @return valor real
+     */
     public int VerifFuncAgente(int pos){
         if(arr_func.get(pos).getFuncao().equalsIgnoreCase("agente"))
             return 0;
@@ -354,6 +364,11 @@ public class GestaoDados_C {
             return -1;
     }
     
+    /**
+     * Metodo que calcula o numero de funcionarios
+     * agentes registrados.
+     * @return valor real
+     */
     public int ObterNumFuncAgentes(){
         int j = 0;
         for (int i = 0; i < arr_func.size(); i++) {
@@ -640,6 +655,13 @@ public class GestaoDados_C {
         return arr_alug.get(num-1);
     }
     
+    /**
+     * Metodo que verifica que a data de entrega 
+     * nao seja antes da data de levantamento.
+     * @param DeHE contêm a data de entrega.
+     * @param DeHL contêm a data de levantamento
+     * @return valor real
+     */
     public int VerifDatas(Calendar DeHE, Calendar DeHL){
         if(DeHE.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
             if(DeHE.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
@@ -651,6 +673,15 @@ public class GestaoDados_C {
         return -1;
     }
     
+    /**
+     * Metodo que verifica que a data de validaçao da
+     * carta de condutor nao esteja antes da data de 
+     * levantamento, tambem tem a condiçao de que data de validaçao
+     * pode ser 30 dias de diferença com a data de levantamento.
+     * @param DeHL contem a data de levantamento
+     * @param DCC contem a data da carta de conduçao
+     * @return valor real
+     */
     public int VerifDataCartCond(Calendar DeHL, Calendar DCC){
         if(DCC.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
             if(DCC.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
@@ -663,22 +694,47 @@ public class GestaoDados_C {
         return -1;
     }
     
+    /**
+     * Metodo que altera a data e hora de levantamento
+     * de um aluguer
+     * @param alug aluguer da classe Aluguer_C
+     */
     public void AltDeHL(Aluguer_C alug){
         arr_alug.get(alug.getNumero()-1).setDialevantHora(alug.getDialevantHora());
     }
     
+    /**
+     * Metodo que altera a data e hora de entrega
+     * de um aluguer
+     * @param alug aluguer da classe Aluguer_C
+     */
     public void AltDeHE(Aluguer_C alug){
         arr_alug.get(alug.getNumero()-1).setDiaentregaHora(alug.getDiaentregaHora());
     }
     
+    /**
+     * Metodo que altera o local de levantamento
+     * de um aluguer
+     * @param alug aluguer da classe Aluguer_C
+     */
     public void AltLocL(Aluguer_C alug){
         arr_alug.get(alug.getNumero()-1).setLocallevant(alug.getLocallevant());
     }
     
+    /**
+     * Metodo que altera o local de entrega
+     * de um aluguer
+     * @param alug aluguer da classe Aluguer_C
+     */
     public void AltLocE(Aluguer_C alug){
         arr_alug.get(alug.getNumero()-1).setLocalentrega(alug.getLocalentrega());
     }
     
+    /**
+     * Metodo que altera o estado
+     * de um aluguer
+     * @param alug aluguer da classe Aluguer_C
+     */
     public void AltTipo(Aluguer_C alug){
         arr_alug.get(alug.getNumero()-1).setTipoaluger(alug.getTipoaluger());
     }
@@ -687,7 +743,14 @@ public class GestaoDados_C {
 //    }
     
     //SERVICOS
-    
+    /**
+     * Metodo que permite determinar a percentagem de combustivel do veiculo
+     * de acordo á quantidade de alugueres que foi feito.
+     * Tambem assigna os dados á classe Servicio_C
+     * @param alug 
+     * @param condic
+     * @param posf 
+     */
     public void NovoServicoL(Aluguer_C alug,String condic, int posf){
         float comb = 0;
         if(alug.getVeiculo().getNumalugueres() == 0)
@@ -702,6 +765,14 @@ public class GestaoDados_C {
         arr_serv.add(s);
     }
     
+    /**
+     * Metodo que atualiza o aluguer o veiculo do servicio
+     * depois de que é entregado.
+     * @param alug
+     * @param condic
+     * @param posf
+     * @param comb 
+     */
     public void NovoServicoE(Aluguer_C alug,String condic, int posf, float comb){
         //atualiza o aluguer
         arr_alug.set(alug.getNumero()-1, alug);
