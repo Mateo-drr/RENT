@@ -62,23 +62,38 @@ public class GestaoDados_C {
         return str.toString();
     }
     
-   /* public String ListarTodosTiposVeiculosMain() {
+//    public String ListarTodosTiposVeiculosMain() {
+//        StringBuilder str = new StringBuilder("");
+//        for (int i = 0; i < arr_tipov.size(); i++) {
+//            str.append(arr_tipov.get(i).getDesignacao()).append("\n");
+//        }
+//        return str.toString();
+//    }
+    
+//    public String NumeroVeiculosxTipos(){
+//        
+//    }
+    
+    /**
+     * Metodo utilizado para apresentar os tipos de veiculos e 
+     * o numero de veiculos asociados a aquele tipo deveiculo 
+     * no menu principal.
+     * @return String
+     */
+    public String DADOSMENU(){
         StringBuilder str = new StringBuilder("");
+        //String str = " ";
         for (int i = 0; i < arr_tipov.size(); i++) {
-            str.append(arr_tipov.get(i).getDesignacao()).append("\n");
-            
+            str.append("\t");
+            str.append(i+1);
+            str.append(". ");
+            str.append(arr_tipov.get(i).getDesignacao());
+            str.append(" - #veic. ");
+            str.append(arr_tipov.get(i).getArr_veic_tv().size());
+            str.append("\n");
         }
         return str.toString();
     }
-    public String NumeroVeiculosxTipos(){
-        for (int i = 0; i < arr_tipov.size(); i++) {
-           
-            return arr_tipov.get(i).ListarTodosVeiculos();
-            
-        }
-        return " ";
-    }
-    */
     
     /**
      * Metodo que verifica que o numero do 

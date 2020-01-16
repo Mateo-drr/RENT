@@ -74,8 +74,9 @@ public class Rent_a_car {
      * @return opcao escolhe o numero de opção.
      */
     public static int menu() {
-        /*System.out.println("Tipo:\t\t\tCantidad de veiculos:");
-        System.out.println(gd.ListarTodosTiposVeiculosMain() + "\t\t\t" + gd.NumeroVeiculosxTipos());*/
+        System.out.println("\t\tRENT A CAR");
+        System.out.println("\n\tNumero de Veic. por tipo:");
+        System.out.println(gd.DADOSMENU());
         System.out.println("1.Veiculos");
         System.out.println("2.Funcionarios");
         System.out.println("3.Condutores");
