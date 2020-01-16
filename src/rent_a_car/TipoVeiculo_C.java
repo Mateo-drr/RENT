@@ -43,7 +43,8 @@ public class TipoVeiculo_C implements Serializable{
         }
         return str.toString();
     }
-
+    
+    
     public TipoVeiculo_C(String designacao, String descricao, double preco) {
         this.designacao = designacao;
         this.descricao = descricao;

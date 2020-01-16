@@ -61,6 +61,22 @@ public class GestaoDados_C {
         return str.toString();
     }
     
+    public String ListarTodosTiposVeiculosMain() {
+        StringBuilder str = new StringBuilder("");
+        for (int i = 0; i < arr_tipov.size(); i++) {
+            str.append(arr_tipov.get(i).getDesignacao()).append("\n");
+            
+        }
+        return str.toString();
+    }
+    public String NumeroVeiculosxTipos(){
+        for (int i = 0; i < arr_tipov.size(); i++) {
+           
+            return arr_tipov.get(i).ListarTodosVeiculos();
+            
+        }
+        return " ";
+    }
     /**
      * Metodo que verifica que o numero do 
      * tipo de veiculo ja exista, porque compara
@@ -845,5 +861,6 @@ public class GestaoDados_C {
             return;
         }
     }
+    
     
 }
