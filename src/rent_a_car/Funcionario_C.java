@@ -20,13 +20,27 @@ public class Funcionario_C extends Pessoa_C implements Serializable{
         this.funcao = funcao;
     }
 
+    
+
+    /**
+     * @return the funcao
+     */
+    public String getFuncao() {
+        return funcao;
+    }
+
+    /**
+     * @param funcao the funcao to set
+     */
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+   
+    
     @Override
     public String toString() {
         return super.toString() + "\nFunçao: " + funcao; //To change body of generated methods, choose Tools | Templates.
     }
-   
-    
-    
     
     
   

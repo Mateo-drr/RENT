@@ -32,7 +32,8 @@ public class GestaoDados_C {
     ArrayList<Aluguer_C> arr_alug = new ArrayList<>(); // Array dos alug.
     ArrayList<PrecoxAno_C> arr_precxano = new ArrayList<>(); // Array do preco total por ano
     ArrayList<NumAlugxMesemAnok_C> arr_numalugxmes = new ArrayList<>(); // Array do numero de alugueres por mes em um ano especifico
-        
+    ArrayList<Servico_C> arr_serv = new ArrayList<>(); // Array dos servicos
+    
     //VEICULOS & TIPO DE VEICULOS
     
     /**
@@ -321,6 +322,31 @@ public class GestaoDados_C {
         return arr_func.size();
     }
     
+    public int ObterFuncxNIF(int NIF_func){
+        for (int i = 0; i < arr_func.size(); i++) {
+            if(arr_func.get(i).getNIF() == NIF_func){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public int VerifFuncAgente(int pos){
+        if(arr_func.get(pos).getFuncao().equalsIgnoreCase("agente"))
+            return 0;
+        else
+            return -1;
+    }
+    
+    public int ObterNumFuncAgentes(){
+        int j = 0;
+        for (int i = 0; i < arr_func.size(); i++) {
+            if(arr_func.get(i).getFuncao().equalsIgnoreCase("agente"))
+                j++;
+        }
+        return j;
+    }
+    
     //CONDUTORES
     
     /**
@@ -387,7 +413,6 @@ public class GestaoDados_C {
         return str.toString();
     }
     
-    
     /**
      * Recebe o int NIF_cond do conductor e compara com 
      * todos os valores NIF de cada conductor dentro do
@@ -396,7 +421,7 @@ public class GestaoDados_C {
      * @param NIF_cond variable int que representa o NIF do conductor
      * @return  valor real
      */
-       public int VerifNIFCond(int NIF_cond){
+    public int VerifNIFCond(int NIF_cond){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getNIF() == NIF_cond){
                 return 0;
@@ -405,15 +430,15 @@ public class GestaoDados_C {
         return -1;
     }
        
-       /**
-        * Recebe o int NIF_cond do conductor e compara com 
-        * todos os valores NIF de cada funcionario dentro do
-        * arr_func, se algum NIF dos funcionarios é igual ao NIF_cond, devolve 
-        * um valor 0 
-        * @param NIF_cond variable int que representa o NIF do conductor
-        * @return valor real
-        */
-       public int VerifNIFCond_Func(int NIF_cond){
+    /**
+    * Recebe o int NIF_cond do conductor e compara com 
+    * todos os valores NIF de cada funcionario dentro do
+    * arr_func, se algum NIF dos funcionarios é igual ao NIF_cond, devolve 
+    * um valor 0 
+    * @param NIF_cond variable int que representa o NIF do conductor
+    * @return valor real
+    */
+    public int VerifNIFCond_Func(int NIF_cond){
            for (int i = 0; i < arr_func.size(); i++){
                if(arr_func.get(i).getNIF() == NIF_cond){
                    return 0;
@@ -422,15 +447,15 @@ public class GestaoDados_C {
            return -1;
        }
        
-       /**
-        * Recebe o int telefone_cond do conductor e compara com 
-        * todos os valores de telefone de cada conductor dentro do
-        * arr_cond, se algum telefone do conductor é igual ao telefone_cond,
-        * devolve um valor 0
-        * @param telefone_cond variable int que representa o telefone do conductor
-        * @return valor real
-        */
-     public int VerifTelefoneCond(int telefone_cond){
+    /**
+    * Recebe o int telefone_cond do conductor e compara com 
+    * todos os valores de telefone de cada conductor dentro do
+    * arr_cond, se algum telefone do conductor é igual ao telefone_cond,
+    * devolve um valor 0
+    * @param telefone_cond variable int que representa o telefone do conductor
+    * @return valor real
+    */
+    public int VerifTelefoneCond(int telefone_cond){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getTelefone() == telefone_cond){
                 return 0;
@@ -439,14 +464,14 @@ public class GestaoDados_C {
         return -1;
     }
     
-     /**
-      * Recebe o int telefone_cond do conductor e compara com 
-      * todos os valores de telefone de cada funcionario dentro do
-      * arr_func, se algum telefone do funcionario é igual ao telefone_cond,
-      * devolve um valor 0
-      * @param telefone_cond variable int que representa o telefone do conductor
-      * @return 
-      */
+    /**
+     * Recebe o int telefone_cond do conductor e compara com 
+     * todos os valores de telefone de cada funcionario dentro do
+     * arr_func, se algum telefone do funcionario é igual ao telefone_cond,
+     * devolve um valor 0
+     * @param telefone_cond variable int que representa o telefone do conductor
+     * @return 
+     */
     public int VerifTelefoneCond_Func(int telefone_cond){
         for (int i = 0; i < arr_func.size(); i++) {
             if(arr_func.get(i).getTelefone() == telefone_cond){
@@ -466,7 +491,7 @@ public class GestaoDados_C {
      * o numero da carta de conduçao do conductor
      * @return valor real
      */
-     public int VerifCartaCond(int cartacond){
+    public int VerifCartaCond(int cartacond){
         for (int i = 0; i < arr_cond.size(); i++) {
             if(arr_cond.get(i).getNumcartacond() == cartacond){
                 return 0;
@@ -622,9 +647,44 @@ public class GestaoDados_C {
         return -1;
     }
     
+    public void AltDeHL(Aluguer_C alug){
+        arr_alug.get(alug.getNumero()-1).setDialevantHora(alug.getDialevantHora());
+    }
+    
+    public void AltDeHE(Aluguer_C alug){
+        arr_alug.get(alug.getNumero()-1).setDiaentregaHora(alug.getDiaentregaHora());
+    }
+    
+    public void AltLocL(Aluguer_C alug){
+        arr_alug.get(alug.getNumero()-1).setLocallevant(alug.getLocallevant());
+    }
+    
+    public void AltLocE(Aluguer_C alug){
+        arr_alug.get(alug.getNumero()-1).setLocalentrega(alug.getLocalentrega());
+    }
+    
+    public void AltTipo(Aluguer_C alug){
+        arr_alug.get(alug.getNumero()-1).setTipoaluger(alug.getTipoaluger());
+    }
 //    public void CancelarAlug(int num){
 //        arr_alug.remove(num-1);
 //    }
+    
+    //SERVICOS
+    
+    public void NovoServico(Aluguer_C alug,String condic, int posf, String tipo){
+        float comb = 0;
+        if(alug.getVeiculo().getNumalugueres() == 0)
+            comb = 100;
+        else{
+            for (int i = 0; i < 10; i++) {
+                if(alug.getVeiculo().equals(arr_serv.get(i).getVeic()))
+                    comb = arr_serv.get(i).getPerccombdisp();
+            }
+        }
+        Servico_C s = new Servico_C(arr_serv.size()+1, alug, alug.getDialevantHora(), condic, comb, arr_func.get(posf), alug.getVeiculo(), tipo);
+        arr_serv.add(s);
+    }
     
     //ESTATISTICAS
     
