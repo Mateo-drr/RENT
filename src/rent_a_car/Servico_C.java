@@ -19,9 +19,10 @@ public class Servico_C {
     private float perccombdisp;
     private Funcionario_C func;
     private Veiculo_C veic;
+    private float quilometragem;
     private String tipo;
 
-    public Servico_C(int numero, Aluguer_C alug, Calendar DeH, String condicoesveic, float perccombdisp, Funcionario_C func, Veiculo_C veic, String tipo) {
+    public Servico_C(int numero, Aluguer_C alug, Calendar DeH, String condicoesveic, float perccombdisp, Funcionario_C func, Veiculo_C veic, String tipo, float quilometragem) {
         this.numero = numero;
         this.alug = alug;
         this.DeH = DeH;
@@ -30,6 +31,7 @@ public class Servico_C {
         this.func = func;
         this.veic = veic;
         this.tipo = tipo;
+        this.quilometragem = quilometragem;
     }
 
     /**
@@ -144,10 +146,26 @@ public class Servico_C {
         this.tipo = tipo;
     }
 
+    /**
+     * @return the quilometragem
+     */
+    public float getQuilometragem() {
+        return quilometragem;
+    }
+
+    /**
+     * @param quilometragem the quilometragem to set
+     */
+    public void setQuilometragem(float quilometragem) {
+        this.quilometragem = quilometragem;
+    }
+
     @Override
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
     
     

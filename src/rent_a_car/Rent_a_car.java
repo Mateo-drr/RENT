@@ -390,7 +390,7 @@ public class Rent_a_car {
         
         int numpessoas = Consola.lerInt("Insira o numero de pessoas que o veiculo pode levar: ", 1, 50);
         String tipogas = Consola.lerString("Insira o tipo de gas: ");
-        int quilometragem = Consola.lerInt("Insira o quilometragem atual: ", 0, 999999999);
+        float quilometragem = Consola.lerFloat("Insira o quilometragem atual: ", 0, 999999999);
         int lig = Consola.lerInt("O veiculo e ligeiro? (1.sim) (0.nao): ", 0, 1);
         boolean ligeiro = (lig == 1);
         
@@ -409,9 +409,6 @@ public class Rent_a_car {
         //Veiculo nao Ligeiro 
            v = new Veiculo_C(matricula, numpessoas, tipogas, quilometragem, tv);
         }
-        
-        
-
         
         //Salvar veiculo
         gd.NovoVeiculo(v);
@@ -759,7 +756,7 @@ public class Rent_a_car {
         Calendar DeHL = new GregorianCalendar();
         
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
+            System.out.println(gd.ListarAlugxEstado(1));
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de levantamento: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             do{
@@ -793,7 +790,7 @@ public class Rent_a_car {
         String datay;
         Calendar DeHE = new GregorianCalendar();
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
+            System.out.println(gd.ListarAlugxEstado(1));
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar a data e hora de entrega: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             do{
@@ -824,7 +821,7 @@ public class Rent_a_car {
     public static void AlterarLocLev(){
         
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
+            System.out.println(gd.ListarAlugxEstado(1));
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de levantamento: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setLocallevant(Consola.lerString("Local de levantamento novo: "));
@@ -841,7 +838,7 @@ public class Rent_a_car {
     public static void AlterarLocEnt(){
         
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
+            System.out.println(gd.ListarAlugxEstado(1));
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja alterar o local de entrega: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setLocalentrega(Consola.lerString("Local de entrega novo: "));
@@ -866,7 +863,7 @@ public class Rent_a_car {
      */
     public static void CancelarAl(){
         if(gd.getTotalAl() != 0){
-            System.out.println(gd.ListarAlugReserv());
+            System.out.println(gd.ListarAlugxEstado(1));
             int numero = Consola.lerInt("Escolha o numero do alguer que deseja cancelar: ", 1, gd.getTotalAl());
             Aluguer_C al = gd.ObterAlugxNum(numero);
             al.setTipoaluger(3);
@@ -897,13 +894,13 @@ public class Rent_a_car {
                             System.out.println("So os funcionarios agentes podem realizar o servico.");
                     }
                 }while(i == -1 || j == -1);
-                System.out.println(gd.ListarAlugReserv());
+                System.out.println(gd.ListarAlugxEstado(1));
                 int numero = Consola.lerInt("Escolha o numero do alguer que deseja iniciar: ", 1, gd.getTotalAl());
                 Aluguer_C al = gd.ObterAlugxNum(numero);
                 al.setTipoaluger(2);
                 gd.AltTipo(al);
                 String condic = Consola.lerString("Condicao atual do veiculo: ");
-                
+                gd.NovoServicoL(al, condic, i);
                 
             }else
                 System.out.println("Nao a funcionarios agentes registrados para realizar o servico");
@@ -933,11 +930,16 @@ public class Rent_a_car {
                             System.out.println("So os funcionarios agentes podem realizar o servico.");
                     }
                 }while(i == -1 || j == -1);
-                System.out.println(gd.ListarAlugxEstado(2)); // revisar si tienes esta funcion con la de alugueres reserv. duplicada, osea si hace lo mismo
+                System.out.println(gd.ListarAlugxEstado(2)); 
                 int numero = Consola.lerInt("Escolha o numero do alguer que deseja entregar: ", 1, gd.getTotalAl());
                 Aluguer_C al = gd.ObterAlugxNum(numero);
                 al.setTipoaluger(4);
                 gd.AltTipo(al);
+                String condic = Consola.lerString("Condicao atual do veiculo: ");
+                float q = Consola.lerFloat("Quilometragem atual: ", al.getVeiculo().getQuilometragem(), 999999999);
+                float comb = Consola.lerFloat("Percentagem de combustivel atual: ", 0, 100);
+                al.getVeiculo().setQuilometragem(q);
+                gd.NovoServicoE(al, condic, i, comb);
             }else
                 System.out.println("Nao a funcionarios agentes registrados para realizar o servico");
         }else

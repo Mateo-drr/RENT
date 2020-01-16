@@ -15,7 +15,7 @@ public class VeiculoLigeiro_C extends Veiculo_C implements Serializable{
         private int capbaggagem;
         private int numportas;
 
-    public VeiculoLigeiro_C(int capbaggagem, int numportas, int matricula, int numpessoas, String tipogas, int quilometragem, TipoVeiculo_C tipo) {
+    public VeiculoLigeiro_C(int capbaggagem, int numportas, int matricula, int numpessoas, String tipogas, float quilometragem, TipoVeiculo_C tipo) {
         super(matricula, numpessoas, tipogas, quilometragem, tipo);
         this.capbaggagem = capbaggagem;
         this.numportas = numportas;
