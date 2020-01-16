@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import util.Consola;
 
@@ -680,9 +681,12 @@ public class GestaoDados_C {
     public int VerifDatas(Calendar DeHE, Calendar DeHL){
         if(DeHE.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
             if(DeHE.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
-                if(DeHE.get(Calendar.DATE) - DeHL.get(Calendar.DATE) > 0){
-                    return 0;
+                if((DeHE.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) == 0) && (DeHE.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) == 0)){
+                    if(DeHE.get(Calendar.DATE) - DeHL.get(Calendar.DATE) > 0){
+                        return 0;
+                    }
                 }
+                return 0;
             }
         }
         return -1;
@@ -700,10 +704,13 @@ public class GestaoDados_C {
     public int VerifDataCartCond(Calendar DeHL, Calendar DCC){
         if(DCC.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) >= 0){
             if(DCC.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) >= 0){
-                //Diferenca minima entre a data do cartao de conducao e a data de levantamento do veiculo e considerada de 30 dias
-                if(DCC.get(Calendar.DAY_OF_YEAR) - DeHL.get(Calendar.DAY_OF_YEAR) >= 30){
-                    return 0;
+                if((DCC.get(Calendar.YEAR) - DeHL.get(Calendar.YEAR) == 0) && (DCC.get(Calendar.MONTH) - DeHL.get(Calendar.MONTH) == 0)){
+                    //Diferenca minima entre a data do cartao de conducao e a data de levantamento do veiculo e considerada de 30 dias
+                    if(DCC.get(Calendar.DAY_OF_YEAR) - DeHL.get(Calendar.DAY_OF_YEAR) >= 30){
+                        return 0;
+                    }
                 }
+                return 0;
             }
         }
         return -1;
@@ -864,9 +871,9 @@ public class GestaoDados_C {
      * @return String com o toString da clase NumAlugxMesemAnok_C, dos alugueres que foram encontrados 
      */
     public String NumAlugxMes(int ano){
-        int conta1 = 0, j = 0;
+        int conta1 = 0, j = 0, k = 0;
         int conta2 = 0,conta3 = 0,conta4 = 0,conta5 = 0,conta6 = 0,conta7 = 0,conta8 = 0,conta9 = 0,conta10 = 0,conta11 = 0,conta12 = 0;
-        NumAlugxMesemAnok_C naxma = new NumAlugxMesemAnok_C(0, " ", 0);
+        NumAlugxMesemAnok_C naxma = new NumAlugxMesemAnok_C(0, " ", 0, 0);
          StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_alug.size(); i++) {
             //Encontra o ano
@@ -879,7 +886,7 @@ public class GestaoDados_C {
                         naxma.setMes("Janeiro");
                         conta1++;
                         naxma.setNumerodealug(conta1);
-                        naxma.setNummes(1);
+                        naxma.setNmes(1);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -887,7 +894,7 @@ public class GestaoDados_C {
                         naxma.setMes("Fevereiro");
                         conta2++;
                         naxma.setNumerodealug(conta2);
-                        naxma.setNummes(2);
+                        naxma.setNmes(2);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -895,7 +902,7 @@ public class GestaoDados_C {
                         naxma.setMes("Marco");
                         conta3++;
                         naxma.setNumerodealug(conta3);
-                        naxma.setNummes(3);
+                        naxma.setNmes(3);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -903,7 +910,7 @@ public class GestaoDados_C {
                         naxma.setMes("Abril");
                         conta4++;
                         naxma.setNumerodealug(conta4);
-                        naxma.setNummes(4);
+                        naxma.setNmes(4);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -911,7 +918,7 @@ public class GestaoDados_C {
                         naxma.setMes("Maio");
                         conta5++;
                         naxma.setNumerodealug(conta5);
-                        naxma.setNummes(5);
+                        naxma.setNmes(5);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -919,7 +926,7 @@ public class GestaoDados_C {
                         naxma.setMes("Junho");
                         conta6++;
                         naxma.setNumerodealug(conta6);
-                        naxma.setNummes(6);
+                        naxma.setNmes(6);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -927,7 +934,7 @@ public class GestaoDados_C {
                         naxma.setMes("Julio");
                         conta7++;
                         naxma.setNumerodealug(conta7);
-                        naxma.setNummes(7);
+                        naxma.setNmes(7);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -935,7 +942,7 @@ public class GestaoDados_C {
                         naxma.setMes("Agosto");
                         conta8++;
                         naxma.setNumerodealug(conta8);
-                        naxma.setNummes(8);
+                        naxma.setNmes(8);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -943,7 +950,7 @@ public class GestaoDados_C {
                         naxma.setMes("Setembro");
                         conta9++;
                         naxma.setNumerodealug(conta9);
-                        naxma.setNummes(9);
+                        naxma.setNmes(9);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -951,7 +958,7 @@ public class GestaoDados_C {
                         naxma.setMes("Outubro");
                         conta10++;
                         naxma.setNumerodealug(conta10);
-                        naxma.setNummes(10);
+                        naxma.setNmes(10);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -959,7 +966,7 @@ public class GestaoDados_C {
                         naxma.setMes("Novembro");
                         conta11++;
                         naxma.setNumerodealug(conta11);
-                        naxma.setNummes(11);
+                        naxma.setNmes(11);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
@@ -967,20 +974,42 @@ public class GestaoDados_C {
                         naxma.setMes("Dezembro");
                         conta12++;
                         naxma.setNumerodealug(conta12);
-                        naxma.setNummes(12);
+                        naxma.setNmes(12);
                         arr_numalugxmes.add(naxma);
                         j++;
                         break;
                 }
-                    str.append(arr_numalugxmes.get(j-1)).append("\n");
+                    //str.append(arr_numalugxmes.get(j-1)).append("\n");
+                 
+//                if(arr_numalugxmes.size() > 1){
+//                    do{
+//                        NumAlugxMesemAnok_C n1 = arr_numalugxmes.get(j);
+//                        NumAlugxMesemAnok_C n2;
+//                    Collections.sort(arr_numalugxmes, new Comparator<NumAlugxMesemAnok_C>(){
+//
+//                        @Override
+//                        public int compare(NumAlugxMesemAnok_C n1, NumAlugxMesemAnok_C n2) {
+//                            return arr_numalugxmes.get(arr_numalugxmes.size()).getNmes().compareTo(arr_numalugxmes.get(arr_numalugxmes.size()+1).getNmes());
+//                        }
+//                    }
+//                    );
+//                             //};
+//                    k++;
+//                    }while(i != arr_numalugxmes.size()-1);
+//        }    
             }
+        
+        for (i = 0; i < 10; i++) {
+            str.append(arr_numalugxmes.get(i)).append("\n");
         }
         if(j > 0){
             return str.toString();
         }else
             return "Nao ha alugueres nese ano";
+        }
+        
+        return " ";
     }
-    
     //FICHEIROS
     
     /**

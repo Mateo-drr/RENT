@@ -14,11 +14,13 @@ public class NumAlugxMesemAnok_C implements Serializable{
     private int numerodealug = 0;
     private String mes;
     private int nummes;
+    private Integer nmes;
 
-    public NumAlugxMesemAnok_C(int numerodealug, String mes, int nummes) {
+    public NumAlugxMesemAnok_C(int numerodealug, String mes, int nummes, Integer nmes) {
         this.numerodealug = numerodealug;
         this.mes = mes;
         this.nummes = nummes;
+        this.nmes = nmes;
     }
 
     /**
@@ -62,10 +64,24 @@ public class NumAlugxMesemAnok_C implements Serializable{
     public void setNummes(int nummes) {
         this.nummes = nummes;
     }
-
+  
     @Override
     public String toString() {
         return mes + " - numero de alugueres: " + numerodealug;
+    }
+
+    /**
+     * @return the nmes
+     */
+    public Integer getNmes() {
+        return nmes;
+    }
+
+    /**
+     * @param nmes the nmes to set
+     */
+    public void setNmes(Integer nmes) {
+        this.nmes = nmes;
     }
    
 }
