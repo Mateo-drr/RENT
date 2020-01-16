@@ -973,6 +973,9 @@ public class Rent_a_car {
             System.out.println("Nao ha alugureres registrados");
     }
     
+    /**
+     * Imprime a soma total dos preços de alugueres por cada ano.
+     */
     public static void PrecoTotalAlugporAno(){
         if(gd.getTotalAl() != 0){
             System.out.println(gd.PrecototAlugxAno());
@@ -980,6 +983,9 @@ public class Rent_a_car {
             System.out.println("Nao ha alugueres registrados!");
     }
     
+    /**
+     * Imprime o numero total de alugueres por cada mes de cada ano
+     */
     public static void NumAlugxMesAno(){
         if(gd.getTotalAl() != 0){
             //Calendar dataesc = new GregorianCalendar();
@@ -991,6 +997,10 @@ public class Rent_a_car {
             System.out.println("Nao ha alugueres registrados!");
     }   
     
+    /**
+     * Permite escolher carregar dados já guardados 
+     * num ficheiro.txt para iniciar o programa.
+     */
     public static void CarregarDados(){
         int i = Consola.lerInt("Deseja carregar os dados anteriores? (1.sim) (0.nao): ", 0, 1);
         if(i == 1){
