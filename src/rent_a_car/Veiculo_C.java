@@ -8,8 +8,9 @@ package rent_a_car;
 import java.io.Serializable;
 
 /**
- *
- * @author Mateo
+ * Classe que representa a um veiculo.
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class Veiculo_C implements Serializable{
     

@@ -10,8 +10,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Classe que representa um condutor
- * @author Mateo
+ * Classe que representa um conductor,
+ * contêm os dados de cada conductor.
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class Condutor_C extends Pessoa_C implements Serializable{
 

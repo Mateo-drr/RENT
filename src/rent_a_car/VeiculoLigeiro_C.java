@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.io.Serializable;
 
 /**
- *
- * @author Mateo
+ * Classe que se extiende da classe veiculo. 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class VeiculoLigeiro_C extends Veiculo_C implements Serializable{
         private int capbaggagem;

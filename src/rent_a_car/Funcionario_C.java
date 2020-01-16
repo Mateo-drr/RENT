@@ -8,8 +8,10 @@ package rent_a_car;
 import java.io.Serializable;
 
 /**
- *
- * @author Mateo
+ * Classe que representa a um funcionario,
+ * contêm os dados de cada funcionario. 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class Funcionario_C extends Pessoa_C implements Serializable{
 

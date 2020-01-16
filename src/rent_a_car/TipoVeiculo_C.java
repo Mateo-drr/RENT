@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
- * @author Mateo
+ * Classe que representa um tipo
+ * de veiculo, dentro desta classe, se vai classificar
+ * cada veiculo de acordo ao tipo de veiculo do que é registrado. 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class TipoVeiculo_C implements Serializable{
 

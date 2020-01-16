@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.io.Serializable;
 import java.util.Calendar;
 
 /**
- *
- * @author Mateo
+ * Classe que permite classificar a cantidade
+ * de alugueres dada uma data(mes/ano). 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class NumAlugxMesemAnok_C implements Serializable{
     private int numerodealug = 0;

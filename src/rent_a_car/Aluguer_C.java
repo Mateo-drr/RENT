@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.io.Serializable;
@@ -10,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *
- * @author Mateo
+ * Classe que contêm os daddos de aluguer.
+ * 
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class Aluguer_C implements Serializable{
     
@@ -27,7 +25,7 @@ public class Aluguer_C implements Serializable{
     private ArrayList< Opcao_aluguel_C> arr_opalug = new ArrayList<>();
     private double preco;
     private int numero;
-
+    
     public Aluguer_C(int tipoaluger, String locallevant, String localentrega, Calendar dialevantHora, Calendar diaentregaHora, Condutor_C condutor, Veiculo_C veiculo, int numpessoas, String caractreserva, double preco) {
         this.tipoaluger = tipoaluger;
         this.locallevant = locallevant;

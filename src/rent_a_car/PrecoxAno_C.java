@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package rent_a_car;
 
 import java.io.Serializable;
@@ -10,8 +6,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- *
- * @author Mateo
+ * Classe que classifica o preço total dos 
+ * alugueres por seu respectivo ano onde foi
+ * registrado o aluguer.
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public class PrecoxAno_C implements Serializable{
     private double preco = 0;

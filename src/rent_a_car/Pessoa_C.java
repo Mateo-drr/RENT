@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 /**
  * Classe que representa uma pessoa (abstracta)
- * @author Mateo
+ * @author Mateo Rodriguez
+ * @author Juan Marcillo
  */
 public abstract class Pessoa_C implements Serializable{
     

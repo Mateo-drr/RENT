@@ -62,7 +62,7 @@ public class GestaoDados_C {
         return str.toString();
     }
     
-    public String ListarTodosTiposVeiculosMain() {
+   /* public String ListarTodosTiposVeiculosMain() {
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_tipov.size(); i++) {
             str.append(arr_tipov.get(i).getDesignacao()).append("\n");
@@ -78,6 +78,8 @@ public class GestaoDados_C {
         }
         return " ";
     }
+    */
+    
     /**
      * Metodo que verifica que o numero do 
      * tipo de veiculo ja exista, porque compara
@@ -214,6 +216,14 @@ public class GestaoDados_C {
         return arr_veic.get(pos);
     }
     
+    /**
+     * Metodo que recebe um String designaçao e compara
+     * com cada designaçao já registrada nos tipos 
+     * de veiculos, se é igual, devolve um valor de 0.
+     * @param designacao variable string que contem 
+     * uma designaçao para comparar.
+     * @return valor real
+     */
     public int VerifDesigTipoVeic(String designacao){
         for (int i = 0; i < arr_tipov.size(); i++) {
             if(arr_tipov.get(i).getDesignacao().equalsIgnoreCase(designacao)){
@@ -235,9 +245,10 @@ public class GestaoDados_C {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo que lista todos os tipos de funcionarios do arr_func
+     * @return String do toString da classe Funcionario_C,
      */
+    
     public String ListarTodosFunc(){
         StringBuilder str = new StringBuilder("");
         for (int i = 0; i < arr_func.size(); i++) {
@@ -322,6 +333,11 @@ public class GestaoDados_C {
         return arr_func.size();
     }
     
+    /**
+     * 
+     * @param NIF_func
+     * @return 
+     */
     public int ObterFuncxNIF(int NIF_func){
         for (int i = 0; i < arr_func.size(); i++) {
             if(arr_func.get(i).getNIF() == NIF_func){
