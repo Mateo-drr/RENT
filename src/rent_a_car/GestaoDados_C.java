@@ -610,18 +610,18 @@ public class GestaoDados_C {
         return str.toString();
     }
     
-    /**
-     * Metodo que classifica os alugueres com tipo 1 (reservado)
-     * @return String do toString da classe Aluguer_C 
-     */
-    public String ListarAlugReserv(){
-        StringBuilder str = new StringBuilder("");
-        for (int i = 0; i < arr_alug.size(); i++) {
-            if(arr_alug.get(i).getTipoaluger() == 1)
-                str.append(arr_alug.get(i)).append("\n");
-        }
-        return str.toString();
-    }
+//    /**
+//     * Metodo que classifica os alugueres com tipo 1 (reservado)
+//     * @return String do toString da classe Aluguer_C 
+//     */
+//    public String ListarAlugReserv(){
+//        StringBuilder str = new StringBuilder("");
+//        for (int i = 0; i < arr_alug.size(); i++) {
+//            if(arr_alug.get(i).getTipoaluger() == 1)
+//                str.append(arr_alug.get(i)).append("\n");
+//        }
+//        return str.toString();
+//    }
     
     /**
      * Metodo utilizado para obter o tamanho do arr_alug
@@ -688,7 +688,7 @@ public class GestaoDados_C {
     
     //SERVICOS
     
-    public void NovoServico(Aluguer_C alug,String condic, int posf, String tipo){
+    public void NovoServicoL(Aluguer_C alug,String condic, int posf){
         float comb = 0;
         if(alug.getVeiculo().getNumalugueres() == 0)
             comb = 100;
@@ -698,7 +698,22 @@ public class GestaoDados_C {
                     comb = arr_serv.get(i).getPerccombdisp();
             }
         }
-        Servico_C s = new Servico_C(arr_serv.size()+1, alug, alug.getDialevantHora(), condic, comb, arr_func.get(posf), alug.getVeiculo(), tipo);
+        Servico_C s = new Servico_C(arr_serv.size()+1, alug, alug.getDialevantHora(), condic, comb, arr_func.get(posf), alug.getVeiculo(), "L", alug.getVeiculo().getQuilometragem());
+        arr_serv.add(s);
+    }
+    
+    public void NovoServicoE(Aluguer_C alug,String condic, int posf, float comb){
+        //atualiza o aluguer
+        arr_alug.set(alug.getNumero()-1, alug);
+        //atualiza o veiculo
+        for (int i = 0; i < arr_veic.size(); i++) {
+            if(arr_veic.get(i).equals(alug.getVeiculo())){
+                arr_veic.get(i).setQuilometragem(alug.getVeiculo().getQuilometragem());
+                break;
+            }
+        }
+        //atualiza os servicos
+        Servico_C s = new Servico_C(arr_serv.size()+1, alug, alug.getDialevantHora(), condic, comb, arr_func.get(posf), alug.getVeiculo(), "E", alug.getVeiculo().getQuilometragem());
         arr_serv.add(s);
     }
     
@@ -897,6 +912,7 @@ public class GestaoDados_C {
             out.writeObject(arr_cond);
             out.writeObject(arr_opalug);
             out.writeObject(arr_alug);
+            out.writeObject(arr_serv);
             out.close();
             wrt.close();
         } 
@@ -922,12 +938,13 @@ public class GestaoDados_C {
             arr_cond = (ArrayList) in.readObject();
             arr_opalug = (ArrayList) in.readObject();
             arr_alug = (ArrayList) in.readObject();
+            arr_serv = (ArrayList) in.readObject();
             in.close();
             read.close();
         } 
-        catch (IOException ioe) 
+        catch (IOException e) 
         {
-            ioe.printStackTrace();
+            e.printStackTrace();
             return;
         } 
         catch (ClassNotFoundException c) 

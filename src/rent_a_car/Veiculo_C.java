@@ -17,12 +17,12 @@ public class Veiculo_C implements Serializable{
     private int matricula;
     private int numpessoas;
     private String tipogas;
-    private int quilometragem;
+    private float quilometragem;
     private int numalugueres;
     private TipoVeiculo_C tipo;
 
 
-    public Veiculo_C(int matricula, int numpessoas, String tipogas, int quilometragem, TipoVeiculo_C tipo) {
+    public Veiculo_C(int matricula, int numpessoas, String tipogas, float quilometragem, TipoVeiculo_C tipo) {
         this.matricula = matricula;
         this.numpessoas = numpessoas;
         this.tipogas = tipogas;
@@ -76,14 +76,14 @@ public class Veiculo_C implements Serializable{
     /**
      * @return the quilometragem
      */
-    public int getQuilometragem() {
+    public float getQuilometragem() {
         return quilometragem;
     }
 
     /**
      * @param quilometragem the quilometragem to set
      */
-    public void setQuilometragem(int quilometragem) {
+    public void setQuilometragem(float quilometragem) {
         this.quilometragem = quilometragem;
     }
 
